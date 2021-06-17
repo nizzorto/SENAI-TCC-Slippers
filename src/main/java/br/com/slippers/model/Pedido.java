@@ -13,13 +13,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Pedido {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(nullable=false)
-	private Long idPedido;
+	private Long id;
 	
 	@ManyToOne
 	@JoinColumn(name="cliente_id", nullable=false)
@@ -35,8 +36,11 @@ public class Pedido {
 		inverseJoinColumns = @JoinColumn(name = "chinelo_id")
 	)
 	private List<Chinelo> chinelosPedido;
-	
-	private Pagamento formaPagamento;
+
+
+	@OneToOne
+	@JoinColumn(name = "cartao_id", referencedColumnName = "id")
+	private Cartao cartaoPagamento;
 	
 	@Enumerated(EnumType.STRING)
 	private StatusPedido statusPedido = StatusPedido.ANALISE;

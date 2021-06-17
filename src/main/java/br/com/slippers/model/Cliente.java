@@ -9,24 +9,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Cliente {
+public class Cliente extends Pessoa{
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(nullable=false)
-	private Long idCliente;
-	
-	@Column(nullable=false)
-	private String nomeCompleto;
-	
-	@Column(unique=true)
-	private String cpf;
-	
-	@Column(unique=true, nullable=false)
-	private String email;
+	private Long id;
 	
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.REMOVE)
 	private List<Favorito> favoritos;
@@ -36,6 +31,14 @@ public class Cliente {
 	
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.REMOVE)
 	private List<Pedido> pedidos;
+	
+	@ManyToMany
+	@JoinTable(
+			name = "cliente_has_cartao",
+			joinColumns = @JoinColumn(name = "cliente_id"),
+			inverseJoinColumns = @JoinColumn(name = "cartao_id")
+		)
+	private List<Cartao> Cartoes;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "carrinho_id", referencedColumnName = "id")

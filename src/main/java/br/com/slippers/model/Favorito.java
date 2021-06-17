@@ -13,13 +13,13 @@ public class Favorito
 {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(nullable=false)
-	private Long idFavorito;
+	private Long id;
 	
 	@ManyToOne
 	@JoinColumn(name = "chinelo_id")
-	private Chinelo chineloFavoritado;
+	private Chinelo chinelo;
 	
-	@ManyToOne
+	@ManyToOne()
 	@JoinColumn(name="cliente_id", nullable=false)
-	private Cliente clienteFavoritou;
+	private Cliente cliente;
 }

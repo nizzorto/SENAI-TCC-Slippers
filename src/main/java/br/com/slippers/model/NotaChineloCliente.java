@@ -13,7 +13,7 @@ public class NotaChineloCliente
 {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(nullable=false)
-	private Long idNotaChineloCliente;
+	private Long id;
 
 	@ManyToOne
 	@JoinColumn(name="cliente_id", nullable=false)

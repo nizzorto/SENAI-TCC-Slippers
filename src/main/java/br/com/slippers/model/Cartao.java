@@ -9,11 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Pagamento {
+public class Cartao {
 		
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(nullable=false)
-	private Long idPagamento;
+	private Long id;
 	
 	@Column(nullable=false)
 	private String titular;
@@ -26,4 +26,6 @@ public class Pagamento {
 	
 	@Column(nullable=false)
 	private Date vencimento;
+	
+	
 }

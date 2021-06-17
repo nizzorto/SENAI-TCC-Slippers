@@ -17,7 +17,7 @@ public class Carrinho {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(nullable=false)
-	private Long idCarrinho;
+	private Long id;
 	
 	@OneToOne(mappedBy="carrinho")
 	@JoinColumn(name = "cliente_id", referencedColumnName = "id")
