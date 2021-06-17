@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slippers</title>
+    <!--stylesheet-->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- ligh slider css -->
+    <link rel="stylesheet" type="text/css" href="css/lightslider.css">
+    <!-- JQuery -->
+    <script src="js/JQuery.js"></script>
+    <!-- light slider js -->
+    <script src="js/lightslider.js"></script>
+    <!--icone do site-->
+    <link rel="shortcut icon" href="images/icon.png" type="image/x-icon">
+    <!--font awesome for icons-->
+    <script src="https://kit.fontawesome.com/6bbed740e4.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!--barra de navegaçãp-->
+    <nav>
+        <!--redes sociais e telefone-->
+        <div class="social-call">
+            <!--redes sociais-->
+            <div class="social">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <!--numero de telefone-->
+            <div class="phone">
+                <span>Ligue +123456789</span>
+            </div>
+        </div>
+        <!--menu -->
+        <div class="navigation">
+            <!--logo-->
+            <a href="#" class="logo">
+                <img src="images/icon.png">
+            </a>
+            <!-- menu icon -->
+            <div class="toggle"></div>
+
+
+
+            <!--menu-->
+            <ul class="menu">
+                <li><a href="index"><i class="fas fa-home"></i></a></li>
+                <li><a href="#"><i class="fas fa-store"></i></a></li>
+            </ul>
+            <!--menu lateral-->
+            <div class="right-menu">
+                <!--pesquisa-->
+                <a href="javascript::void(0)" class="search">
+                    <i class="fas fa-search"></i>
+                </a>
+                <!--user-->
+                <a href="javascript::void(0)" class="user">
+                    <i class="far fa-user"></i>
+                </a>
+                <!--icone carrinho-->
+                <a href="cart">
+                    <i class="fas fa-shopping-cart">
+                        <!-- numero de produtos no carrinho -->
+                        <span class="num-cart-product">0</span>
+                    </i>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <!-- barra de pesquisa -->
+    <div class="search-bar">
+        <!-- input de pesquisa -->
+        <div class="search-input">
+            <!-- input -->
+            <input type="text" placeholder="Pesquise por um produto" />
+            <!-- botão cancelar -->
+            <a href="javascript::void(0)" class="search-cancel">
+                <i class="fas fa-times"></i>
+            </a>
+        </div>
+    </div>
+
+    <!---login e criar conta-->
+    <div class="form">
+        <!--login---------->
+        <div class="login-form">
+            <!--botao cancelar---------------->
+            <a href="javascript::void(0)" class="form-cancel">
+                <i class="fas fa-times"></i>
+            </a>
+            <strong>Login</strong>
+            <!--inputs-->
+            <form>
+                <input type="email" name="email" placeholder="Example@gmail.com" required />
+                <input type="password" name="password" placeholder="Senha" required />
+                <input type="submit" value="Login" />
+            </form>
+            <!--esqueceu senha e criar conta-->
+            <div class="form-btns">
+                <a href="#" class="forget">Esqueceu sua senha?</a>
+                <a href="javascript::void(0)" class="sign-up-btn">Criar conta</a>
+            </div>
+        </div>
+        <!--Criar conta-->
+        <div class="sign-up-form">
+            <!----botao cancelar------>
+            <a href="javascript::void(0)" class="form-cancel">
+                <i class="fas fa-times"></i>
+            </a>
+            <strong>Criar Conta</strong>
+            <!--inputs-->
+            <form>
+                <input type="text" name="fullname" placeholder="Nome Completo" required />
+                <input type="email" name="email" placeholder="Example@gmail.com" required />
+                <input type="password" name="password" placeholder="Senha" required />
+                <input type="submit" value="Criar Conta" />
+            </form>
+            <!--botao esqueceu senha e criar conta-->
+            <div class="form-btns">
+                <a href="javascript::void(0)" class="already-account">Já possui uma conta>?</a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Full Slider -->
+
+    <ul id="adaptive" class="cs-hidden">
+        <!-- box 1 -->
+        <li class="item-a">
+            <!-- box -->
+            <div class="full-slider-box f-slide-1">
+                <!-- slider text container -->
+                <div class="slider-text-container">
+
+                    <div class="f-slider-text">
+                        <span>Lorem ipsum dolor</span>
+                        <strong>Lorem ipsum dolor<br />
+                            <font> Lorem ipsum dolor</font>
+                        </strong>
+                        <a href="#" class="f-slider-btn">Comprar agora</a>
+                    </div>
+
+                </div>
+            </div>
+        </li>
+        <li class="item-a">
+            <!-- box -->
+            <div class="full-slider-box f-slide-2">
+                <!-- slider text container -->
+                <div class="slider-text-container">
+
+                    <div class="f-slider-text">
+                        <span>Lorem ipsum dolor</span>
+                        <strong>Lorem ipsum dolor<br />
+                            <font> Lorem ipsum dolor</font>
+                        </strong>
+                        <a href="#" class="f-slider-btn">Comprar agora</a>
+                    </div>
+
+                </div>
+            </div>
+        </li>
+        <li class="item-a">
+            <!-- box -->
+            <div class="full-slider-box f-slide-3">
+                <!-- slider text container -->
+                <div class="slider-text-container">
+
+                    <div class="f-slider-text">
+                        <span>Lorem ipsum dolor</span>
+                        <strong>Lorem ipsum dolor<br />
+                            <font> Lorem ipsum dolor</font>
+                        </strong>
+                        <a href="#" class="f-slider-btn">Comprar agora</a>
+                    </div>
+
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    <!-- Categorias -->
+
+    <!-- <div class="feature-heading"> -->
+    <!-- <h2>Categorias</h2> -->
+    <!-- </div> -->
+
+    <!-- <ul id="autoWidth" class="cs-hidden"> -->
+    <!-- 1 -->
+    <!-- <li class="item"> -->
+    <!-- Categoria -->
+    <!-- <div class="feature-box"> -->
+    <!-- <a href="#"></a> -->
+    <!-- <img src="images/chinelo-vermelho.jpg"> -->
+    <!-- </div> -->
+    <!-- text -->
+    <!-- <span>Camiseta</span> -->
+    <!-- </li> -->
+    <!-- 2 -->
+    <!-- <li class="item"> -->
+    <!-- Categoria -->
+    <!-- <div class="feature-box"> -->
+    <!-- <a href="#"></a> -->
+    <!-- <img src="images/chinelo-vermelho.jpg"> -->
+    <!-- </div> -->
+    <!-- text -->
+    <!-- <span>Camiseta</span> -->
+    <!-- </li> -->
+    <!-- 3 -->
+    <!-- <li class="item"> -->
+    <!-- Categoria -->
+    <!-- <div class="feature-box"> -->
+    <!-- <a href="#"></a> -->
+    <!-- <img src="images/chinelo-vermelho.jpg"> -->
+    <!-- </div> -->
+    <!-- text -->
+    <!-- <span>Camiseta</span> -->
+    <!-- </li> -->
+    <!-- 4 -->
+    <!-- <li class="item"> -->
+    <!-- Categoria -->
+    <!-- <div class="feature-box"> -->
+    <!-- <a href="#"></a> -->
+    <!-- <img src="images/chinelo-vermelho.jpg"> -->
+    <!-- </div> -->
+    <!-- text -->
+    <!-- <span>Almofada</span> -->
+    <!-- </li> -->
+    <!-- 5 -->
+    <!-- <li class="item"> -->
+    <!-- Categoria -->
+    <!-- <div class="feature-box"> -->
+    <!-- <a href="#"></a> -->
+    <!-- <img src="images/chinelo-vermelho.jpg"> -->
+    <!-- </div> -->
+    <!-- text -->
+    <!-- <span>Celular</span> -->
+    <!-- </li> -->
+    <!-- 6 -->
+    <!-- <li class="item"> -->
+    <!-- Categoria -->
+    <!-- <div class="feature-box"> -->
+    <!-- <a href="#"></a> -->
+    <!-- <img src="images/chinelo-vermelho.jpg"> -->
+    <!-- </div> -->
+    <!-- text -->
+    <!-- <span>Sacola</span> -->
+    <!-- </li> -->
+
+    <!-- </ul> -->
+
+    <!-- lançamentos -->
+    <section class="new-arrival">
+        <!-- heading -->
+        <div class="arrival-heading">
+            <strong>Loja</strong>
+        </div>
+
+        <!-- product container -->
+        <div class="product-container">
+            <!-- product box 1 -->
+            <div class="product-box">
+
+                <!-- img -->
+                <div class="product-img">
+                    <!-- adicionar ao carrinho -->
+                    <a href="#" class="add-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <img src="images/slippers.png" />
+                </div>
+                <!-- details -->
+                <div class="product-details">
+                    <a href="#">Chinelo Azul</a>
+                    <span class="p-price">R$15,00</span>
+                </div>
+            </div>
+            <!-- product box 2 -->
+            <div class="product-box">
+
+                <!-- img -->
+                <div class="product-img">
+                    <!-- adicionar ao carrinho -->
+                    <a href="#" class="add-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <img src="images/slippers.png" />
+                </div>
+                <!-- detalhes -->
+                <div class="product-details">
+                    <a href="#">Chinelo Azul</a>
+                    <span class="p-price">R$15,00</span>
+                </div>
+            </div>
+            <!-- product box 3 -->
+            <div class="product-box">
+
+                <!-- img -->
+                <div class="product-img">
+                    <!-- adicionar ao carrinho-->
+                    <a href="#" class="add-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <img src="images/slippers.png" />
+                </div>
+                <!-- detalhes -->
+                <div class="product-details">
+                    <a href="#">Chinelo Azul</a>
+                    <span class="p-price">R$15,00</span>
+                </div>
+            </div>
+            <!-- product box 4 -->
+            <div class="product-box">
+
+                <!-- img -->
+                <div class="product-img">
+                    <!-- adicionar ao carrinho -->
+                    <a href="#" class="add-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <img src="images/slippers.png" />
+                </div>
+                <!-- detalhes -->
+                <div class="product-details">
+                    <a href="#">Chinelo Azul</a>
+                    <span class="p-price">R$15,00</span>
+                </div>
+            </div>
+            <!-- product box 5 -->
+            <div class="product-box">
+
+                <!-- img -->
+                <div class="product-img">
+                    <!-- adicionar ao carrinho -->
+                    <a href="#" class="add-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <img src="images/slippers.png" />
+                </div>
+                <!-- detalhes -->
+                <div class="product-details">
+                    <a href="#">Chinelo Azul</a>
+                    <span class="p-price">R$15,00</span>
+                </div>
+            </div>
+            <!-- product box 6 -->
+            <div class="product-box">
+
+                <!-- img -->
+                <div class="product-img">
+                    <!-- adicionar ao carrinho -->
+                    <a href="#" class="add-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <img src="images/slippers.png" />
+                </div>
+                <!-- detalhes -->
+                <div class="product-details">
+                    <a href="#">Chinelo Azul</a>
+                    <span class="p-price">R$15,00</span>
+                </div>
+            </div>
+            <!-- product box 7 -->
+            <div class="product-box">
+
+                <!-- img -->
+                <div class="product-img">
+                    <!-- adicionar ao carrinho -->
+                    <a href="#" class="add-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <img src="images/slippers.png" />
+                </div>
+                <!-- detalhes -->
+                <div class="product-details">
+                    <a href="#">Chinelo Azul</a>
+                    <span class="p-price">R$15,00</span>
+                </div>
+            </div>
+            <!-- product box 8 -->
+            <div class="product-box">
+
+                <!-- img -->
+                <div class="product-img">
+                    <!-- adicionar ao carrinho -->
+                    <a href="#" class="add-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <img src="images/slippers.png" />
+                </div>
+                <!-- detalhes -->
+                <div class="product-details">
+                    <a href="#">Chinelo Azul</a>
+                    <span class="p-price">R$15,00</span>
+                </div>
+            </div>
+                  <!-- product box 7 -->
+                  <div class="product-box">
+
+                    <!-- img -->
+                    <div class="product-img">
+                        <!-- adicionar ao carrinho -->
+                        <a href="#" class="add-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
+                        <img src="images/slippers.png" />
+                    </div>
+                    <!-- detalhes -->
+                    <div class="product-details">
+                        <a href="#">Chinelo Azul</a>
+                        <span class="p-price">R$15,00</span>
+                    </div>
+                </div>
+                      <!-- product box 7 -->
+            <div class="product-box">
+
+                <!-- img -->
+                <div class="product-img">
+                    <!-- adicionar ao carrinho -->
+                    <a href="#" class="add-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <img src="images/slippers.png" />
+                </div>
+                <!-- detalhes -->
+                <div class="product-details">
+                    <a href="#">Chinelo Azul</a>
+                    <span class="p-price">R$15,00</span>
+                </div>
+            </div>
+                  <!-- product box 7 -->
+                  <div class="product-box">
+
+                    <!-- img -->
+                    <div class="product-img">
+                        <!-- adicionar ao carrinho -->
+                        <a href="#" class="add-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
+                        <img src="images/slippers.png" />
+                    </div>
+                    <!-- detalhes -->
+                    <div class="product-details">
+                        <a href="#">Chinelo Azul</a>
+                        <span class="p-price">R$15,00</span>
+                    </div>
+                </div>
+                      <!-- product box 7 -->
+            <div class="product-box">
+
+                <!-- img -->
+                <div class="product-img">
+                    <!-- adicionar ao carrinho -->
+                    <a href="#" class="add-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <img src="images/slippers.png" />
+                </div>
+                <!-- detalhes -->
+                <div class="product-details">
+                    <a href="#">Chinelo Azul</a>
+                    <span class="p-price">R$15,00</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- sale -->
+    <section class="sale">
+        <!-- sale box 1 -->
+        <div class="sale-box">
+            <!-- img -->
+            <img src="images/banner.jpg">
+            <!-- text -->
+            <a href="#">
+                <div class="sale-text">
+                    <strong>Lorem ipsum</strong>
+                    <span>Desconto de 25%</span>
+                </div>
+            </a>
+        </div>
+
+        <!-- sale box 2-->
+        <div class="sale-box">
+            <!-- img -->
+            <img src="images/banner.jpg">
+            <!-- text -->
+            <a href="#">
+                <div class="sale-text">
+                    <strong>Lorem ipsum</strong>
+                    <span>Desconto de 25%</span>
+                </div>
+            </a>
+        </div>
+
+        <!-- sale box 3-->
+        <div class="sale-box">
+            <!-- img -->
+            <img src="images/banner.jpg">
+            <!-- text -->
+            <a href="#">
+                <div class="sale-text">
+                    <strong>Lorem ipsum</strong>
+                    <span>Desconto de 25%</span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- new arrival -->
+    <section class="new-arrival">
+        <!-- headign -->
+        <div class="arrival-heading">
+
+            <strong>Lançamentos</strong>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        </div>
+
+        <!-- product container -->
+        <div class="cart-container">
+            <!-- product box 1 -->
+            <div class="product-box-cart">
+
+                <!-- img -->
+                <div class="product-img">
+                    <!--adicionar ao carrinho -->
+                    <a href="#" class="add-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <img src="images/slippers.png" />
+                </div>
+                <!-- detalhes -->
+                <div class="product-details">
+                    <a href="#">Chinelo Amarelo</a>
+                    <span class="p-price">R$25,00</span>
+                </div>
+            </div>
+            <!-- product box 2 -->
+            <div class="product-box">
+
+                <!-- img -->
+                <div class="product-img">
+                    <!-- adicionar ao carrinho -->
+                    <a href="#" class="add-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <img src="images/slippers.png" />
+                </div>
+                <!-- detalhes -->
+                <div class="product-details">
+                    <a href="#">Chinelo Amarelo</a>
+                    <span class="p-price">R$25,00</span>
+                </div>
+            </div>
+            <!-- product box 3 -->
+            <div class="product-box">
+
+                <!-- img -->
+                <div class="product-img">
+                    <!-- adicionar ao carrinho -->
+                    <a href="#" class="add-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <img src="images/slippers.png" />
+                </div>
+                <!-- detalhes -->
+                <div class="product-details">
+                    <a href="#">Chinelo Amarelo</a>
+                    <span class="p-price">>R$25,00</span>
+                </div>
+            </div>
+            <!-- product box 4 -->
+            <div class="product-box">
+
+                <!-- img -->
+                <div class="product-img">
+                    <!-- add cart -->
+                    <a href="#" class="add-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <img src="images/slippers.png" />
+                </div>
+                <!-- detalhes -->
+                <div class="product-details">
+                    <a href="#">Chinelo Amarelo</a>
+                    <span class="p-price">R$25,00</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- services -->
+    <section class="services">
+        <!-- services-box -->
+        <div class="services-box">
+            <i class="fas fa-shipping-fast"></i>
+            <span>Frete Gratis</span>
+            <p>Frete gratis para todo Brasil</p>
+        </div>
+        <!-- services-box -->
+        <div class="services-box">
+            <i class="fas fa-headphones-alt"></i>
+            <span>Suporte 24 horas</span>
+            <p>Suporte online 24 horas todos os dias da semana</p>
+        </div>
+        <!-- services-box -->
+        <div class="services-box">
+            <i class="fas fa-sync"></i>
+            <span>Garantia de 30 dias</span>
+            <p>Garantia de 30 dias para todos os produtos da loja</p>
+        </div>
+
+    </section>
+
+    <!-- footer -->
+    <footer>
+        <!-- copyright -->
+        <span class="copyright">
+            Copyright 2021 - SISTEMA FIEP
+        </span>
+        <!-- subscribe -->
+        <div class="subscribe">
+            <form>
+                <input type="email" placeholder="example@emai.com" required />
+                <input type="submit" value="Inscrever-se">
+            </form>
+        </div>
+    </footer>
+
+    <!-- Script -->
+    <script type="text/javascript" src="js/main.js"></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
