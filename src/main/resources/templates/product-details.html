@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slippers</title>
+    <!--stylesheet-->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- ligh slider css -->
+    <link rel="stylesheet" type="text/css" href="css/lightslider.css">
+    <!-- JQuery -->
+    <script src="js/JQuery.js"></script>
+    <!-- light slider js -->
+    <script src="js/lightslider.js"></script>
+    <!--icone do site-->
+    <link rel="shortcut icon" href="images/icon.png" type="image/x-icon">
+    <!--font awesome for icons-->
+    <script src="https://kit.fontawesome.com/6bbed740e4.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!--barra de navegaçãp-->
+    <nav>
+        <!--redes sociais e telefone-->
+        <div class="social-call">
+            <!--redes sociais-->
+            <div class="social">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <!--numero de telefone-->
+            <div class="phone">
+                <span>Ligue +123456789</span>
+            </div>
+        </div>
+        <!--menu -->
+        <div class="navigation">
+            <!--logo-->
+            <a href="#" class="logo">
+                <img src="images/icon.png">
+            </a>
+
+            <!--menu lateral-->
+            <div class="right-menu">
+                <!--pesquisa-->
+                <a href="javascript::void(0)" class="search">
+                    <i class="fas fa-search"></i>
+                </a>
+                <!--user-->
+                <a href="javascript::void(0)" class="user">
+                    <i class="far fa-user"></i>
+                </a>
+                <!--icone carrinho-->
+                <a href="cart.html" class="cart-icon">
+                    <i class="fas fa-shopping-cart">
+                        <!-- numero de produtos no carrinho -->
+                        <span class="num-cart-product">0</span>
+                    </i>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <!-- barra de pesquisa -->
+    <div class="search-bar">
+        <!-- input de pesquisa -->
+        <div class="search-input">
+            <!-- input -->
+            <input type="text" placeholder="Pesquise por um produto" />
+            <!-- botão cancelar -->
+            <a href="javascript::void(0)" class="search-cancel">
+                <i class="fas fa-times"></i>
+            </a>
+        </div>
+    </div>
+
+    <!---login e criar conta-->
+    <div class="form">
+        <!--login---------->
+        <div class="login-form">
+            <!--botao cancelar---------------->
+            <a href="javascript::void(0)" class="form-cancel">
+                <i class="fas fa-times"></i>
+            </a>
+            <strong>Login</strong>
+            <!--inputs-->
+            <form>
+                <input type="email" name="email" placeholder="Example@gmail.com" required />
+                <input type="password" name="password" placeholder="Senha" required />
+                <input type="submit" value="Login" />
+            </form>
+            <!--esqueceu senha e criar conta-->
+            <div class="form-btns">
+                <a href="#" class="forget">Esqueceu sua senha?</a>
+                <a href="javascript::void(0)" class="sign-up-btn">Criar conta</a>
+            </div>
+        </div>
+
+        <!--Criar conta-->
+        <div class="sign-up-form">
+            <!----botao cancelar------>
+            <a href="javascript::void(0)" class="form-cancel">
+                <i class="fas fa-times"></i>
+            </a>
+            <strong>Criar Conta</strong>
+            <!--inputs-->
+            <form>
+                <input type="text" name="fullname" placeholder="Nome Completo" required />
+                <input type="email" name="email" placeholder="Example@gmail.com" required />
+                <input type="password" name="password" placeholder="Senha" required />
+                <input type="submit" value="Criar Conta" />
+            </form>
+            <!--botao esqueceu senha e criar conta-->
+            <div class="form-btns">
+                <a href="javascript::void(0)" class="already-account">Já possui uma conta?</a>
+            </div>
+        </div>
+
+    </div>
+
+<!-- Product Details -->
+<section class="section product-detail">
+    <div class="details container-md">
+      <div class="left">
+        <div class="main">
+          <img src="/images/chinelo azul.jpg" alt="">
+        </div>
+      </div>
+      <div class="right">
+        <span>Chinelada</span>
+        <h1>Chinelo</h1>
+        <div class="price">$50</div>
+        <form>
+          <div>
+            <select>
+              <option value="Select Size" selected disabled>Selecionar tamanho</option>
+              <option value="1">38</option>
+              <option value="2">39</option>
+              <option value="3">40</option>
+              <option value="4">41</option>
+              <option value="5">42</option>
+              <option value="6">43</option>
+            </select>
+            <span><i class='bx bx-chevron-down'></i></span>
+          </div>
+        </form>
+
+        <form class="addCart-btn">
+          <input type="text" placeholder="1">
+          <a href="cart.html" class="addCart">Adicionar ao carrinho</a>
+        </form>
+        <h3>Product Detail</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero minima delectus nulla voluptates nesciunt
+          quidem laudantium, quisquam voluptas facilis dicta in explicabo, laboriosam ipsam suscipit!</p>
+      </div>
+    </div>
+  </section>
+
+    <!-- footer -->
+    <footer>
+        <!-- copyright -->
+        <span class="copyright">
+            Copyright 2021 - SISTEMA FIEP
+        </span>
+        <!-- subscribe -->
+        <div class="subscribe">
+            <form>
+                <input type="email" placeholder="example@emai.com" required />
+                <input type="submit" value="Inscrever-se">
+            </form>
+        </div>
+    </footer>
+
+
+
+    <!-- Script -->
+    <script type="text/javascript" src="js/main.js"></script>
+
+</body>
+
+</html>

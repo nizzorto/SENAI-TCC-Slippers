@@ -17,5 +17,5 @@ public class TokenDTO {
 	public String getTipo() {
 		return tipo;
 	}
-
+	
 }

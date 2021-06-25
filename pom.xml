@@ -17,17 +17,13 @@
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
-	
+
+	<!-- _______________ SPRING BOOT _______________ -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		
-	
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -39,44 +35,14 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
-		
-		<!-- <dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<scope>runtime</scope>	
-		</dependency>  -->
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
 
-		
-		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt</artifactId>
-			<version>0.9.1</version>
-		</dependency>
-		
-		
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		
-		<dependency>
-		    <groupId>javax.validation</groupId>
-		    <artifactId>validation-api</artifactId>
-		</dependency>
-		
-		<dependency>
-		    <groupId>org.glassfish</groupId>
-		    <artifactId>javax.el</artifactId>
-		    <version>3.0.1-b09</version>
-		</dependency>
-		
+		<!-- _______________ SPRING SECURITY _______________ -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
@@ -87,13 +53,54 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- _______________ WEB TOKEN _______________ -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+
+		<!-- _______________ THYMELEAF _______________ -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
 		
+		<!-- _______________ MYSQL _______________ -->
+   		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>	
+		</dependency>
+
+		<!-- _______________ H2 _______________ -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency> 
+	
+		
+		<!-- _______________ JAVA VALIDATOR _______________ -->
+		<dependency>
+		    <groupId>javax.validation</groupId>
+		    <artifactId>validation-api</artifactId>
+		</dependency>
+
+		<dependency>
+		    <groupId>org.glassfish</groupId>
+		    <artifactId>javax.el</artifactId>
+		    <version>3.0.1-b09</version>
+		</dependency>
+
 		<dependency>
 		    <groupId>org.hibernate.validator</groupId>
 		    <artifactId>hibernate-validator-cdi</artifactId>
 		    <version>6.0.16.Final</version>
 		</dependency>
-			<dependency>
+		
+		<dependency>
 		    <groupId>org.hibernate.validator</groupId>
 		    <artifactId>hibernate-validator</artifactId>
 		</dependency>

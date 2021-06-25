@@ -20,11 +20,7 @@ $(document).on('click', '.form-cancel', () => {
     $('.form').removeClass('login-active').removeClass('sign-up-active')
 });
 
-//Botao loja
-$(document).on('click', '.fas.fa-store', () => {
-    $('html, body').animate({ scrollTop: 550}, 500);
-})
-
+//Product form
 
 //Slider
 $(document).ready(() => {
@@ -47,10 +43,4 @@ $(window).scroll(()=>{
     }
 });
 
-//Menu responsivo
-$(document).ready(()=>{
-    $('.toggle').click(()=>{
-        $('.toggle').toggleClass('active')
-        $('.navigation').toggleClass('active')
-    })
-})
+

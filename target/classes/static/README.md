@@ -1,1 +1,0 @@
-"# TCC-SENAI-SLIPPERS" 

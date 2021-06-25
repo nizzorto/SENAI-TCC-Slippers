@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch SecurityConfigurations",
+            "request": "launch",
+            "mainClass": "br.com.slippers.config.security.SecurityConfigurations",
+            "projectName": "slippers"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-SlippersApplication<slippers>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "br.com.slippers.SlippersApplication",
+            "projectName": "slippers",
+            "args": ""
+        }
+    ]
+}

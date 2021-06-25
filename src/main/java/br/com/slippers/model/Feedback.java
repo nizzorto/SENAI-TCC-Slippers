@@ -19,6 +19,6 @@ public class Feedback {
 	private String texto;
 
 	@ManyToOne
-	@JoinColumn(name="id_cliente", nullable=false)
-	private Cliente cliente;
+	@JoinColumn(name="usuario_id", nullable=false)
+	private Usuario usuario;
 }

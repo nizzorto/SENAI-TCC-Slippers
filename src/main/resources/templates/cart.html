@@ -39,19 +39,10 @@
         <!--menu -->
         <div class="navigation">
             <!--logo-->
-            <a href="#" class="logo">
+            <a href="index.html" class="logo">
                 <img src="images/icon.png">
             </a>
-            <!-- menu icon -->
-            <div class="toggle"></div>
 
-
-
-            <!--menu-->
-            <ul class="menu">
-                <li><a href="index"><i class="fas fa-home"></i></a></li>
-                <li><a href="#"><i class="fas fa-store"></i></a></li>
-            </ul>
             <!--menu lateral-->
             <div class="right-menu">
                 <!--pesquisa-->
@@ -63,7 +54,7 @@
                     <i class="far fa-user"></i>
                 </a>
                 <!--icone carrinho-->
-                <a href="cart">
+                <a href="javascript::void(0)" class="cart-icon">
                     <i class="fas fa-shopping-cart">
                         <!-- numero de produtos no carrinho -->
                         <span class="num-cart-product">0</span>
@@ -106,6 +97,7 @@
                 <a href="javascript::void(0)" class="sign-up-btn">Criar conta</a>
             </div>
         </div>
+
         <!--Criar conta-->
         <div class="sign-up-form">
             <!----botao cancelar------>
@@ -125,29 +117,89 @@
                 <a href="javascript::void(0)" class="already-account">Já possui uma conta>?</a>
             </div>
         </div>
+
     </div>
 
-    <section class="cart">
-        <div class="cart-heading">
-            <strong>Carrinho</strong>
-        </div>
-        <div class="cart-container">
-            <ul class="cart-list">
-                <div class="product-box">
+    
+ <!-- Cart Items -->
+ <div class="cart">
+     <strong>Carrinho <i class="fas fa-shopping-cart"></i></strong>
+    <table id="table">
+      <tr>
+        <th>Produto</th>
+        <th>Quantidade</th>
+        <th>Subtotal</th>
+      </tr>
+      <tr>
+        <td>
+          <div class="cart-info">
+            <img src="/images/chinelo-amarelo.jpg" alt="">
+            <div>
+              <p>Chinelo</p>
+              <span>Preço: R$50.00</span>
+              <br />
+              <a href="#">remover</a>
+            </div>
+          </div>
+        </td>
+        <td><input type="number" value="1" min="1"></td>
+        <td>$50.00</td>
+      </tr>
+      <tr>
+        <td>
+          <div class="cart-info">
+            <img src="/images/chinelo azul.jpg" alt="">
+            <div>
+              <p>Chinelo</p>
+              <span>Preço: R$50.00</span>
+              <br />
+              <a href="#">remover</a>
+            </div>
+          </div>
+        </td>
+        <td><input type="number" value="1" min="1"></td>
+        <td>$50.00</td>
+      </tr>
+    </table>
 
-                    <!-- img -->
-                    <div class="product-img">   
-                        <img src="images/slippers.png" />
-                    </div>
-                    <!-- detalhes -->
-                    <div class="product-details">
-                        <a href="#">Chinelo Amarelo</a>
-                        <span class="p-price">R$25,00</span>
-                    </div>
-                </div>
-            </ul>
+    <div class="total-price">
+      <table>
+        <tr>
+          <td>Total</td>
+          <td>$250</td>
+        </tr>
+      </table>
+    </div>
+    <div class="cart-btns">
+       
+           <input type="submit" value="Confirmar Compra">
+    </div>
+
+  </div>
+
+    <!-- services -->
+    <section class="services">
+        <!-- services-box -->
+        <div class="services-box">
+            <i class="fas fa-shipping-fast"></i>
+            <span>Frete Gratis</span>
+            <p>Frete gratis para todo Brasil</p>
         </div>
+        <!-- services-box -->
+        <div class="services-box">
+            <i class="fas fa-headphones-alt"></i>
+            <span>Suporte 24 horas</span>
+            <p>Suporte online 24 horas todos os dias da semana</p>
+        </div>
+        <!-- services-box -->
+        <div class="services-box">
+            <i class="fas fa-sync"></i>
+            <span>Garantia de 30 dias</span>
+            <p>Garantia de 30 dias para todos os produtos da loja</p>
+        </div>
+
     </section>
+
     <!-- footer -->
     <footer>
         <!-- copyright -->
@@ -162,6 +214,8 @@
             </form>
         </div>
     </footer>
+
+
 
     <!-- Script -->
     <script type="text/javascript" src="js/main.js"></script>

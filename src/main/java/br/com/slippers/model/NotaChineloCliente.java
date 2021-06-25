@@ -16,10 +16,13 @@ public class NotaChineloCliente
 	private Long id;
 
 	@ManyToOne
-	@JoinColumn(name="cliente_id", nullable=false)
-	private Cliente cliente;
+	@JoinColumn(name="usuario_id", nullable=false)
+	private Usuario usuario;
 	
 	@ManyToOne
 	@JoinColumn(name="chinelo_id", nullable=false)
 	private Chinelo chinelo;
+	
+	@Column(nullable=false)
+	private double nota;
 }

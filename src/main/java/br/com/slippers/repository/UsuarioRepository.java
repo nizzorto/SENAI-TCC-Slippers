@@ -9,5 +9,4 @@ import br.com.slippers.model.Usuario;
 public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 
 	Optional<Usuario> findByEmail(String username);
-
 }

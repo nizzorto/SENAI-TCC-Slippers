@@ -1,4 +1,4 @@
-package br.com.slippers.controller;
+/* package br.com.slippers.controller;
 
 import javax.validation.Valid;
 
@@ -43,3 +43,4 @@ public class AuthController {
 	
 	
 }
+*/

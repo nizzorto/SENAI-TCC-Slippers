@@ -1,4 +1,4 @@
-package br.com.slippers.service;
+/* package br.com.slippers.service;
 
 import org.springframework.stereotype.Service;
 
@@ -11,5 +11,5 @@ public class SlippersService {
 
 	}
 	
-	
-}
+
+} */

@@ -1,4 +1,4 @@
-package br.com.slippers.controller.form;
+/* package br.com.slippers.controller.form;
 
 import javax.validation.constraints.NotBlank;
 
@@ -32,3 +32,4 @@ public class LoginForm {
 	}
 
 }
+*/

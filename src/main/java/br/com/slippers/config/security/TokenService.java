@@ -1,4 +1,4 @@
-package br.com.slippers.config.security;
+/* package br.com.slippers.config.security;
 
 import java.util.Date;
 
@@ -49,3 +49,4 @@ public class TokenService {
 	}
 
 }
+*/

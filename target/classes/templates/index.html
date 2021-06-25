@@ -42,16 +42,7 @@
             <a href="#" class="logo">
                 <img src="images/icon.png">
             </a>
-            <!-- menu icon -->
-            <div class="toggle"></div>
 
-
-
-            <!--menu-->
-            <ul class="menu">
-                <li><a href="index"><i class="fas fa-home"></i></a></li>
-                <li><a href="#"><i class="fas fa-store"></i></a></li>
-            </ul>
             <!--menu lateral-->
             <div class="right-menu">
                 <!--pesquisa-->
@@ -63,7 +54,7 @@
                     <i class="far fa-user"></i>
                 </a>
                 <!--icone carrinho-->
-                <a href="cart">
+                <a href="cart.html" class="cart-icon">
                     <i class="fas fa-shopping-cart">
                         <!-- numero de produtos no carrinho -->
                         <span class="num-cart-product">0</span>
@@ -95,7 +86,7 @@
             </a>
             <strong>Login</strong>
             <!--inputs-->
-            <form action="auth" method="POST">
+            <form>
                 <input type="email" name="email" placeholder="Example@gmail.com" required />
                 <input type="password" name="password" placeholder="Senha" required />
                 <input type="submit" value="Login" />
@@ -106,6 +97,7 @@
                 <a href="javascript::void(0)" class="sign-up-btn">Criar conta</a>
             </div>
         </div>
+
         <!--Criar conta-->
         <div class="sign-up-form">
             <!----botao cancelar------>
@@ -114,7 +106,7 @@
             </a>
             <strong>Criar Conta</strong>
             <!--inputs-->
-            <form>
+            <form action="createAccount" method="POST">
                 <input type="text" name="fullname" placeholder="Nome Completo" required />
                 <input type="email" name="email" placeholder="Example@gmail.com" required />
                 <input type="password" name="password" placeholder="Senha" required />
@@ -122,14 +114,22 @@
             </form>
             <!--botao esqueceu senha e criar conta-->
             <div class="form-btns">
-                <a href="javascript::void(0)" class="already-account">Já possui uma conta>?</a>
+                <a href="javascript::void(0)" class="already-account">Já possui uma conta?</a>
             </div>
+        </div>
+
+    </div>
+
+    <!-- Item form -->
+    <div class="form-item">
+        <div class="item-form">
+            <a href="javascript::void(0)" class="form-cancel">
+                <i class="fas fa-times"></i>
+            </a>
         </div>
     </div>
 
-
     <!-- Full Slider -->
-
     <ul id="adaptive" class="cs-hidden">
         <!-- box 1 -->
         <li class="item-a">
@@ -185,77 +185,7 @@
         </li>
     </ul>
 
-    <!-- Categorias -->
-
-    <!-- <div class="feature-heading"> -->
-    <!-- <h2>Categorias</h2> -->
-    <!-- </div> -->
-
-    <!-- <ul id="autoWidth" class="cs-hidden"> -->
-    <!-- 1 -->
-    <!-- <li class="item"> -->
-    <!-- Categoria -->
-    <!-- <div class="feature-box"> -->
-    <!-- <a href="#"></a> -->
-    <!-- <img src="images/chinelo-vermelho.jpg"> -->
-    <!-- </div> -->
-    <!-- text -->
-    <!-- <span>Camiseta</span> -->
-    <!-- </li> -->
-    <!-- 2 -->
-    <!-- <li class="item"> -->
-    <!-- Categoria -->
-    <!-- <div class="feature-box"> -->
-    <!-- <a href="#"></a> -->
-    <!-- <img src="images/chinelo-vermelho.jpg"> -->
-    <!-- </div> -->
-    <!-- text -->
-    <!-- <span>Camiseta</span> -->
-    <!-- </li> -->
-    <!-- 3 -->
-    <!-- <li class="item"> -->
-    <!-- Categoria -->
-    <!-- <div class="feature-box"> -->
-    <!-- <a href="#"></a> -->
-    <!-- <img src="images/chinelo-vermelho.jpg"> -->
-    <!-- </div> -->
-    <!-- text -->
-    <!-- <span>Camiseta</span> -->
-    <!-- </li> -->
-    <!-- 4 -->
-    <!-- <li class="item"> -->
-    <!-- Categoria -->
-    <!-- <div class="feature-box"> -->
-    <!-- <a href="#"></a> -->
-    <!-- <img src="images/chinelo-vermelho.jpg"> -->
-    <!-- </div> -->
-    <!-- text -->
-    <!-- <span>Almofada</span> -->
-    <!-- </li> -->
-    <!-- 5 -->
-    <!-- <li class="item"> -->
-    <!-- Categoria -->
-    <!-- <div class="feature-box"> -->
-    <!-- <a href="#"></a> -->
-    <!-- <img src="images/chinelo-vermelho.jpg"> -->
-    <!-- </div> -->
-    <!-- text -->
-    <!-- <span>Celular</span> -->
-    <!-- </li> -->
-    <!-- 6 -->
-    <!-- <li class="item"> -->
-    <!-- Categoria -->
-    <!-- <div class="feature-box"> -->
-    <!-- <a href="#"></a> -->
-    <!-- <img src="images/chinelo-vermelho.jpg"> -->
-    <!-- </div> -->
-    <!-- text -->
-    <!-- <span>Sacola</span> -->
-    <!-- </li> -->
-
-    <!-- </ul> -->
-
-    <!-- lançamentos -->
+    <!-- Loja -->
     <section class="new-arrival">
         <!-- heading -->
         <div class="arrival-heading">
@@ -265,6 +195,7 @@
         <!-- product container -->
         <div class="product-container">
             <!-- product box 1 -->
+            
             <div class="product-box">
 
                 <!-- img -->
@@ -277,10 +208,11 @@
                 </div>
                 <!-- details -->
                 <div class="product-details">
-                    <a href="#">Chinelo Azul</a>
+                    <a href="product-details.html">Chinelo Azul</a>
                     <span class="p-price">R$15,00</span>
                 </div>
             </div>
+
             <!-- product box 2 -->
             <div class="product-box">
 
@@ -294,7 +226,7 @@
                 </div>
                 <!-- detalhes -->
                 <div class="product-details">
-                    <a href="#">Chinelo Azul</a>
+                    <a href="product-details.html">Chinelo Azul</a>
                     <span class="p-price">R$15,00</span>
                 </div>
             </div>
@@ -311,7 +243,7 @@
                 </div>
                 <!-- detalhes -->
                 <div class="product-details">
-                    <a href="#">Chinelo Azul</a>
+                    <a href="product-details.html">Chinelo Azul</a>
                     <span class="p-price">R$15,00</span>
                 </div>
             </div>
@@ -328,7 +260,7 @@
                 </div>
                 <!-- detalhes -->
                 <div class="product-details">
-                    <a href="#">Chinelo Azul</a>
+                    <a href="product-details.html">Chinelo Azul</a>
                     <span class="p-price">R$15,00</span>
                 </div>
             </div>
@@ -345,7 +277,7 @@
                 </div>
                 <!-- detalhes -->
                 <div class="product-details">
-                    <a href="#">Chinelo Azul</a>
+                    <a href="product-details.html">Chinelo Azul</a>
                     <span class="p-price">R$15,00</span>
                 </div>
             </div>
@@ -362,7 +294,7 @@
                 </div>
                 <!-- detalhes -->
                 <div class="product-details">
-                    <a href="#">Chinelo Azul</a>
+                    <a href="product-details.html">Chinelo Azul</a>
                     <span class="p-price">R$15,00</span>
                 </div>
             </div>
@@ -379,7 +311,7 @@
                 </div>
                 <!-- detalhes -->
                 <div class="product-details">
-                    <a href="#">Chinelo Azul</a>
+                    <a href="product-details.html">Chinelo Azul</a>
                     <span class="p-price">R$15,00</span>
                 </div>
             </div>
@@ -396,28 +328,28 @@
                 </div>
                 <!-- detalhes -->
                 <div class="product-details">
-                    <a href="#">Chinelo Azul</a>
+                    <a href="product-details.html">Chinelo Azul</a>
                     <span class="p-price">R$15,00</span>
                 </div>
             </div>
-                  <!-- product box 7 -->
-                  <div class="product-box">
+            <!-- product box 9 -->
+            <div class="product-box">
 
-                    <!-- img -->
-                    <div class="product-img">
-                        <!-- adicionar ao carrinho -->
-                        <a href="#" class="add-cart">
-                            <i class="fas fa-shopping-cart"></i>
-                        </a>
-                        <img src="images/slippers.png" />
-                    </div>
-                    <!-- detalhes -->
-                    <div class="product-details">
-                        <a href="#">Chinelo Azul</a>
-                        <span class="p-price">R$15,00</span>
-                    </div>
+                <!-- img -->
+                <div class="product-img">
+                    <!-- adicionar ao carrinho -->
+                    <a href="index.html" class="add-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <img src="images/slippers.png" />
                 </div>
-                      <!-- product box 7 -->
+                <!-- detalhes -->
+                <div class="product-details">
+                    <a href="product-details.html">Chinelo Azul</a>
+                    <span class="p-price">R$15,00</span>
+                </div>
+            </div>
+            <!-- product box 10-->
             <div class="product-box">
 
                 <!-- img -->
@@ -430,28 +362,11 @@
                 </div>
                 <!-- detalhes -->
                 <div class="product-details">
-                    <a href="#">Chinelo Azul</a>
+                    <a href="product-details.html">Chinelo Azul</a>
                     <span class="p-price">R$15,00</span>
                 </div>
             </div>
-                  <!-- product box 7 -->
-                  <div class="product-box">
-
-                    <!-- img -->
-                    <div class="product-img">
-                        <!-- adicionar ao carrinho -->
-                        <a href="#" class="add-cart">
-                            <i class="fas fa-shopping-cart"></i>
-                        </a>
-                        <img src="images/slippers.png" />
-                    </div>
-                    <!-- detalhes -->
-                    <div class="product-details">
-                        <a href="#">Chinelo Azul</a>
-                        <span class="p-price">R$15,00</span>
-                    </div>
-                </div>
-                      <!-- product box 7 -->
+            <!-- product box 11 -->
             <div class="product-box">
 
                 <!-- img -->
@@ -464,7 +379,24 @@
                 </div>
                 <!-- detalhes -->
                 <div class="product-details">
-                    <a href="#">Chinelo Azul</a>
+                    <a href="product-details.html">Chinelo Azul</a>
+                    <span class="p-price">R$15,00</span>
+                </div>
+            </div>
+            <!-- product box 12-->
+            <div class="product-box">
+
+                <!-- img -->
+                <div class="product-img">
+                    <!-- adicionar ao carrinho -->
+                    <a href="#" class="add-cart" >
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <img src="images/slippers.png" />
+                </div>
+                <!-- detalhes -->
+                <div class="product-details">
+                    <a href="product-details.html">Chinelo Azul</a>
                     <span class="p-price">R$15,00</span>
                 </div>
             </div>
@@ -514,7 +446,7 @@
         </div>
     </section>
 
-    <!-- new arrival -->
+    <!-- Lançamento -->
     <section class="new-arrival">
         <!-- headign -->
         <div class="arrival-heading">
@@ -635,17 +567,10 @@
         </div>
     </footer>
 
+
+
     <!-- Script -->
     <script type="text/javascript" src="js/main.js"></script>
-
-
-
-
-
-
-
-
-
 
 </body>
 
