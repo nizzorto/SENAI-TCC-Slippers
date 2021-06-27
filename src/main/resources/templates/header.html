@@ -1,27 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slippers</title>
-    <!--stylesheet-->
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <!-- ligh slider css -->
-    <link rel="stylesheet" type="text/css" href="css/lightslider.css">
-    <!-- JQuery -->
-    <script src="js/JQuery.js"></script>
-    <!-- light slider js -->
-    <script src="js/lightslider.js"></script>
-    <!--icone do site-->
-    <link rel="shortcut icon" href="images/icon.png" type="image/x-icon">
-    <!--font awesome for icons-->
-    <script src="https://kit.fontawesome.com/6bbed740e4.js" crossorigin="anonymous"></script>
-</head>
-
-<body>
-    <!--barra de navegaçãp-->
+<html>   
+    <head></head>
+    <body>
+   <!--barra de navegaçãp-->
     <nav>
         <!--redes sociais e telefone-->
         <div class="social-call">
@@ -68,12 +48,19 @@
         <!-- input de pesquisa -->
         <div class="search-input">
             <!-- input -->
-            <input type="text" placeholder="Pesquise por um produto" />
+            <input type="text" placeholder="Pesquise por um produto" list="historic" />
             <!-- botão cancelar -->
             <a href="javascript::void(0)" class="search-cancel">
                 <i class="fas fa-times"></i>
             </a>
         </div>
+        <datalist id="historic">
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+        </datalist>
     </div>
 
     <!---login e criar conta-->
@@ -120,63 +107,18 @@
 
     </div>
 
-<!-- Product Details -->
-<section class="section product-detail">
-    <div class="details container-md">
-      <div class="left">
-        <div class="main">
-          <img src="/images/chinelo azul.jpg" alt="">
+    <!-- Item form -->
+    <div class="form-item">
+        <div class="item-form">
+            <a href="javascript::void(0)" class="form-cancel">
+                <i class="fas fa-times"></i>
+            </a>
         </div>
-      </div>
-      <div class="right">
-        <h1>Chinelo</h1>
-        <div class="price">$50</div>
-        <form>
-          <div>
-            <select>
-              <option value="Select Size" selected disabled>Selecionar tamanho</option>
-              <option value="1">38</option>
-              <option value="2">39</option>
-              <option value="3">40</option>
-              <option value="4">41</option>
-              <option value="5">42</option>
-              <option value="6">43</option>
-            </select>
-            <span><i class='bx bx-chevron-down'></i></span>
-          </div>
-        </form>
-
-        <form class="addCart-btn">
-          <input type="text" placeholder="1">
-          <a href="cart.html" class="addCart">Adicionar ao carrinho</a>
-        </form>
-        <h3>Product Detail</h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero minima delectus nulla voluptates nesciunt
-          quidem laudantium, quisquam voluptas facilis dicta in explicabo, laboriosam ipsam suscipit!</p>
-      </div>
     </div>
-  </section>
-
-    <!-- footer -->
-    <footer>
-        <!-- copyright -->
-        <span class="copyright">
-            Copyright 2021 - SISTEMA FIEP
-        </span>
-        <!-- subscribe -->
-        <div class="subscribe">
-            <form>
-                <input type="email" placeholder="example@emai.com" required />
-                <input type="submit" value="Inscrever-se">
-            </form>
-        </div>
-    </footer>
-
-
-
-    <!-- Script -->
-    <script type="text/javascript" src="js/main.js"></script>
-
+    <script>
+        function onLoad()
+    </script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </body>
-
 </html>
