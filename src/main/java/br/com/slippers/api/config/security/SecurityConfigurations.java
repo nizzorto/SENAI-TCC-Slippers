@@ -54,10 +54,10 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 	 * Execute o main abaixo e insira uma senha dentro de .encode("") para 
 	 * codificar uma senha.
 	 * a resposta retornará no console
-	 */
-//	public static void main(String[] args) {
-//		System.out.println(new BCryptPasswordEncoder().encode("senha aleatoria"));
-//	}
+	//  */
+	// public static void main(String[] args) {
+	// 	System.out.println(new BCryptPasswordEncoder().encode("abc123456"));
+	// }
 
 	//Config de autorização
 	@Override
@@ -78,7 +78,8 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 		.antMatchers("/", "/css/**", "/images/**", "/img/**", "/js/**", "/h2-console/**").permitAll()
 		.antMatchers(HttpMethod.GET, "/api/chinelo").permitAll()
-        .antMatchers("/auth").permitAll()
+        .antMatchers("/api/auth").permitAll()
+		.antMatchers("/swagger-ui/**").hasAuthority("ADMIN")
 		.anyRequest().authenticated()
         .and().csrf().disable()
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

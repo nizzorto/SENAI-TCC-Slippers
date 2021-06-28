@@ -69,7 +69,7 @@ public class UsuarioRest {
         @CacheEvict(value = "listaUsuario", allEntries = true)
         public ResponseEntity<UsuarioDTO> newUsuario(@RequestBody @Valid UsuarioForm uForm,
         UriComponentsBuilder builder) {
-    
+            
             Usuario usuario = Usuario.toUsuario(uForm);
             usuarioR.save(usuario);
             

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -35,10 +36,7 @@ public class EnderecoService {
 	
 		EnderecoForm eForm = monoEndereco.block();
          List<Usuario> usuarios = new ArrayList<Usuario>();
-         Usuario usuario = new Usuario();
-         usuario.setIdUsuario(1L);
-         usuario.setEmail("ee@email");
-         usuario.setTotalCompras(0); 
+         Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
          usuarios.add(usuario);
         Endereco endereco = eForm.toEndereco();
         endereco.setNumero(cepForm.getNumero());

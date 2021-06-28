@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -40,10 +41,9 @@ public class PedidoService {
         
         Optional<Endereco> enderecoPedido = enderecoR.findById(Long.parseLong(pForm.getIdEndereco()));
         Optional<Cartao> cartaoPedido = cartaoR.findById(Long.parseLong(pForm.getIdCartao()));
-        Usuario usuario = new Usuario();
-        usuario.setIdUsuario(1L);
-        usuario.setEmail("example@email.com");
-        usuario.setTotalCompras(0); 
+        
+        Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         Optional<Carrinho> carrinho = carrinhoR.findByUsuario(usuario);
          if(carrinho.isEmpty()) {
              throw new NotFoundException("Carrinho não encontrado!");

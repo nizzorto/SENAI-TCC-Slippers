@@ -4,6 +4,13 @@
             "type": "java",
             "name": "Launch SecurityConfigurations",
             "request": "launch",
+            "mainClass": "br.com.slippers.api.config.security.SecurityConfigurations",
+            "projectName": "slippers"
+        },
+        {
+            "type": "java",
+            "name": "Launch SecurityConfigurations",
+            "request": "launch",
             "mainClass": "br.com.slippers.config.security.SecurityConfigurations",
             "projectName": "slippers"
         },

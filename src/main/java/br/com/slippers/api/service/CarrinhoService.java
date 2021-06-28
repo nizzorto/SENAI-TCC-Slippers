@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import br.com.slippers.api.dto.CarrinhoDTO;
@@ -31,11 +32,9 @@ public class CarrinhoService {
      ChineloRepository chineloR;
 
      public ResponseEntity<?> listCarrinho(Pageable paginarChinelos) throws NotFoundException {
-         Usuario usuario = new Usuario();
-         usuario.setIdUsuario(1L);
-         usuario.setEmail("ee@email");
-         usuario.setTotalCompras(0);
-         
+
+        Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
          Optional<Carrinho> carrinho = carrinhoR.findByUsuario(usuario);
          if(carrinho.isEmpty()) {
              throw new NotFoundException("Carrinho não encontrado!");
@@ -46,12 +45,8 @@ public class CarrinhoService {
 
      public ResponseEntity<?> insertChinelo(CarrinhoForm cForm) 
      throws NotFoundException, AlreadyBoundException {
- 
-         Usuario usuario = new Usuario();
-         usuario.setIdUsuario(1L);
-         usuario.setEmail("ee@email");
-         usuario.setTotalCompras(0);
- 
+
+        Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
          Carrinho carrinho = carrinhoR.findByUsuario(usuario).orElseThrow(()
          -> new NotFoundException("Usuário não encontrado!"));
  
@@ -64,11 +59,7 @@ public class CarrinhoService {
  
 
      public ResponseEntity<?> deleteChinelo(String idChinelo) throws NotFoundException {
-         Usuario usuario = new Usuario();
-         usuario.setIdUsuario(1L);
-         usuario.setEmail("ee@email");
-         usuario.setTotalCompras(0);
- 
+         Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
          Carrinho carrinho = carrinhoR.findByUsuario(usuario).orElseThrow(()
          -> new NotFoundException("Usuário não encontrado!"));
          
@@ -80,11 +71,7 @@ public class CarrinhoService {
 
 
      public ResponseEntity<CarrinhoDTO> updateChineloCarrinho(CarrinhoForm cForm) throws NotFoundException {
-        Usuario usuario = new Usuario();
-        usuario.setIdUsuario(1L);
-        usuario.setEmail("ee@email");
-        usuario.setTotalCompras(0);
-
+        Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Carrinho carrinho = carrinhoR.findByUsuario(usuario).orElseThrow(()
         -> new NotFoundException("Usuário não encontrado!"));
         

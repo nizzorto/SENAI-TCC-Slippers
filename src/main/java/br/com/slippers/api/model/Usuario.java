@@ -19,6 +19,7 @@ import javax.persistence.OneToOne;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import br.com.slippers.api.dto.UsuarioDTO;
 import br.com.slippers.api.form.UsuarioForm;
@@ -223,6 +224,15 @@ public class Usuario implements UserDetails {
 		return usuarios.stream().map(Usuario::toDTO).toList();
     }
 
+
+	public List<Perfil> getPerfis() {
+		return this.perfis;
+	}
+
+	public void setPerfis(List<Perfil> perfis) {
+		this.perfis = perfis;
+	}
+
 	public UsuarioDTO toDTO() {
         return new UsuarioDTO(this);
     }
@@ -231,7 +241,7 @@ public class Usuario implements UserDetails {
 		Usuario usuario = new Usuario();
 		usuario.email = uForm.getEmail();
 		usuario.nome = uForm.getNome();
-		usuario.senha = uForm.getSenha();
+		usuario.senha = new BCryptPasswordEncoder().encode(uForm.getSenha());
 		return usuario;
     }
 

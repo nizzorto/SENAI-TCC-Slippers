@@ -1,4 +1,4 @@
-package br.com.slippers.api.config.security;
+package br.com.slippers.api.controller;
 
 import javax.validation.Valid;
 
@@ -10,11 +10,15 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
+import br.com.slippers.api.config.security.LoginForm;
+import br.com.slippers.api.config.security.TokenDTO;
+import br.com.slippers.api.config.security.TokenService;
 
 @Controller
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
 	
 	@Autowired
@@ -24,9 +28,8 @@ public class AuthController {
 	private TokenService tokenService;
 
 	@PostMapping
-	public ResponseEntity<TokenDTO> autenticar(@Valid LoginForm form) {
+	public ResponseEntity<TokenDTO> autenticar(@RequestBody @Valid LoginForm form) {
 		UsernamePasswordAuthenticationToken dadosLogin = form.convert();
-		
 		try {
 			Authentication authentication = authManager.authenticate(dadosLogin);
 			String token = tokenService.gerarToken(authentication);
