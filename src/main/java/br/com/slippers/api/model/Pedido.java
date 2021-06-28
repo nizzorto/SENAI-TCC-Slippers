@@ -10,8 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -31,14 +29,13 @@ public class Pedido {
 	@Column(nullable=false)
 	private double totalPedido = 0;
 	
-	@ManyToMany
-	@JoinTable(
-		name = "pedido_has_chinelo",
-		joinColumns = @JoinColumn(name = "pedido_id"),
-		inverseJoinColumns = @JoinColumn(name = "chinelo_id")
-	)
-	private List<Chinelo> chinelosPedido;
+	@OneToOne
+	@JoinColumn(name = "carrinho_id", referencedColumnName = "id")
+	private Carrinho carrinhoPedido;
 
+	@OneToOne
+	@JoinColumn(name = "endereco_id", referencedColumnName = "id")
+	private Endereco enderecoEntrega;
 
 	@OneToOne
 	@JoinColumn(name = "cartao_id", referencedColumnName = "id")
@@ -47,6 +44,14 @@ public class Pedido {
 	@Enumerated(EnumType.STRING)
 	private StatusPedido statusPedido = StatusPedido.ANALISE;
 
+
+	public Pedido(Endereco endereco, Cartao cartao, Usuario usuario, Carrinho carrinho) {
+		this.enderecoEntrega = endereco;
+		this.cartaoPagamento = cartao;
+		this.usuario = usuario;
+		this.carrinhoPedido = carrinho;
+		this.totalPedido = carrinho.getTotalCarrinho();
+	}
 
 	public Long getId() {
 		return this.id;
@@ -72,14 +77,6 @@ public class Pedido {
 		this.totalPedido = totalPedido;
 	}
 
-	public List<Chinelo> getChinelosPedido() {
-		return this.chinelosPedido;
-	}
-
-	public void setChinelosPedido(List<Chinelo> chinelosPedido) {
-		this.chinelosPedido = chinelosPedido;
-	}
-
 	public Cartao getCartaoPagamento() {
 		return this.cartaoPagamento;
 	}
@@ -103,4 +100,23 @@ public class Pedido {
     public static List<PedidoDTO> toListDTO(List<Pedido> pedidos){
         return pedidos.stream().map(Pedido::toDTO).toList();
     }
+
+
+	public Carrinho getCarrinhoPedido() {
+		return this.carrinhoPedido;
+	}
+
+	public void setCarrinhoPedido(Carrinho carrinhoPedido) {
+		this.carrinhoPedido = carrinhoPedido;
+	}
+
+	public Endereco getEnderecoEntrega() {
+		return this.enderecoEntrega;
+	}
+
+	public void setEnderecoEntrega(Endereco enderecoEntrega) {
+		this.enderecoEntrega = enderecoEntrega;
+	}
+
+
 }

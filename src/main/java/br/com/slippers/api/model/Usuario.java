@@ -1,6 +1,7 @@
 package br.com.slippers.api.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -16,11 +17,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import br.com.slippers.api.dto.UsuarioDTO;
 import br.com.slippers.api.form.UsuarioForm;
-
-// import org.springframework.security.core.GrantedAuthority;
-// import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * @Entity: diz ao jpa que esta classe será uma tabela no banco de dados
@@ -29,7 +30,7 @@ import br.com.slippers.api.form.UsuarioForm;
  * alguns métodos.
 */
 @Entity
-public class Usuario /* implements UserDetails */{
+public class Usuario implements UserDetails {
 
 
 	/** 
@@ -71,8 +72,8 @@ public class Usuario /* implements UserDetails */{
 	 * @ManyToMany: diz ao jpa que aqui possui um relacionamento Muitos para Muitos
 	 * fetchtype.EAGER: diz ao jpa para buscar junto à tabela usuário, a tabela com seus perfis.
 	 */
-	//  @ManyToMany(fetch = FetchType.EAGER)
-	//  private List<Perfil> perfis = new ArrayList<>();
+	 @ManyToMany(fetch = FetchType.EAGER)
+	 private List<Perfil> perfis = new ArrayList<>();
 
 
 	/**
@@ -107,7 +108,7 @@ public class Usuario /* implements UserDetails */{
 	 * cartao_id com inverseJoinColumns.
 	 * lembrando que por padrão, o nome das colunas id que foram "Joinadas" é coluna_id
 	 */
-	@ManyToMany
+	@OneToMany(cascade = CascadeType.REMOVE)
 	@JoinTable(
 			name = "usuario_has_cartao",
 			joinColumns = @JoinColumn(name = "usuario_id"),
@@ -240,44 +241,44 @@ public class Usuario /* implements UserDetails */{
 	//  * 
 	//  * @Override: Implementa o método requirido pela interface (UserDetails) 
 	//  */
-	// @Override
-	// public String getPassword() {
-	// 	return this.senha;
-	// }
-	// //Mostra ao spring que aqui é onde se pega o username (no nosso caso é o email)
-	// @Override
-	// public String getUsername() {
-	// 	return this.email;
-	// }
+	@Override
+	public String getPassword() {
+		return this.senha;
+	}
+	//Mostra ao spring que aqui é onde se pega o username (no nosso caso é o email)
+	@Override
+	public String getUsername() {
+		return this.email;
+	}
 
-	// //Se a conta não foi expirada
-	// @Override
-	// public boolean isAccountNonExpired() {
-	// 	return true;
-	// }
+	//Se a conta não foi expirada
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
 
-	// //Se a conta não está bloqueada
-	// @Override
-	// public boolean isAccountNonLocked() {
-	// 	return true;
-	// }
+	//Se a conta não está bloqueada
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
 
-	// //Se as credenciais não estão expiradas
-	// @Override
-	// public boolean isCredentialsNonExpired() {
-	// 	return true;
-	// }
+	//Se as credenciais não estão expiradas
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
 
-	// //Se o usuário está habilitado
-	// @Override
-	// public boolean isEnabled() {
-	// 	return true;
-	// }
+	//Se o usuário está habilitado
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 
-	// //Para o spring security, é necessário ter o usuário para autenticar
-	// //E a coleção com os perfis deste usuário para autorizar
-	// @Override
-	// public Collection<? extends GrantedAuthority> getAuthorities() {
-	// 	return this.perfis;
-	// }
+	//Para o spring security, é necessário ter o usuário para autenticar
+	//E a coleção com os perfis deste usuário para autorizar
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return this.perfis;
+	}
 }

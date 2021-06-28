@@ -1,28 +1,27 @@
 package br.com.slippers.api.dto;
 
-import java.util.List;
-
-import br.com.slippers.api.model.Cartao;
-import br.com.slippers.api.model.Chinelo;
 import br.com.slippers.api.model.Pedido;
 import br.com.slippers.api.model.StatusPedido;
-import br.com.slippers.api.model.Usuario;
+import net.minidev.json.annotate.JsonIgnore;
 
 public class PedidoDTO {
 
     private Long id;
-    private Usuario usuario;
+    @JsonIgnore
+    private String emailUsuario;
     private double totalPedido;
-    private List<Chinelo> chinelosPedido;
-    private Cartao cartaoPagamento;
+    private CarrinhoDTO carrinhoPedido;
+    private CartaoDTO cartaoPagamento;
+    private EnderecoDTO enderecoEntrega;
     private StatusPedido statusPedido;
 
     public PedidoDTO(Pedido pedido) {
         this.id = pedido.getId();
-        this.usuario = pedido.getUsuario();
+        this.emailUsuario = pedido.getUsuario().getEmail();
         this.totalPedido = pedido.getTotalPedido();
-        this.chinelosPedido = pedido.getChinelosPedido();
-        this.cartaoPagamento = pedido.getCartaoPagamento();
+        this.carrinhoPedido = pedido.getCarrinhoPedido().toDTO();
+        this.cartaoPagamento = pedido.getCartaoPagamento().toDTO();
+        this.enderecoEntrega = pedido.getEnderecoEntrega().toDTO();
         this.statusPedido = pedido.getStatusPedido();
     }
 
@@ -34,14 +33,6 @@ public class PedidoDTO {
         this.id = id;
     }
 
-    public Usuario getUsuario() {
-        return this.usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
     public double getTotalPedido() {
         return this.totalPedido;
     }
@@ -50,28 +41,45 @@ public class PedidoDTO {
         this.totalPedido = totalPedido;
     }
 
-    public List<Chinelo> getChinelosPedido() {
-        return this.chinelosPedido;
-    }
-
-    public void setChinelosPedido(List<Chinelo> chinelosPedido) {
-        this.chinelosPedido = chinelosPedido;
-    }
-
-    public Cartao getCartaoPagamento() {
-        return this.cartaoPagamento;
-    }
-
-    public void setCartaoPagamento(Cartao cartaoPagamento) {
-        this.cartaoPagamento = cartaoPagamento;
-    }
-
     public StatusPedido getStatusPedido() {
         return this.statusPedido;
     }
 
     public void setStatusPedido(StatusPedido statusPedido) {
         this.statusPedido = statusPedido;
+    }
+
+    public String getEmailUsuario() {
+        return this.emailUsuario;
+    }
+
+    public void setEmailUsuario(String emailUsuario) {
+        this.emailUsuario = emailUsuario;
+    }
+
+    public CarrinhoDTO getCarrinhoPedido() {
+        return this.carrinhoPedido;
+    }
+
+    public void setCarrinhoPedido(CarrinhoDTO carrinhoPedido) {
+        this.carrinhoPedido = carrinhoPedido;
+    }
+
+    public CartaoDTO getCartaoPagamento() {
+        return this.cartaoPagamento;
+    }
+
+    public void setCartaoPagamento(CartaoDTO cartaoPagamento) {
+        this.cartaoPagamento = cartaoPagamento;
+    }
+
+
+    public EnderecoDTO getEnderecoEntrega() {
+        return this.enderecoEntrega;
+    }
+
+    public void setEnderecoEntrega(EnderecoDTO enderecoEntrega) {
+        this.enderecoEntrega = enderecoEntrega;
     }
 
     

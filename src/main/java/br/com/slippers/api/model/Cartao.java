@@ -18,7 +18,6 @@ public class Cartao {
 	@Column(nullable=false)
 	private Long id;
 	
-	@Column(nullable=false)
 	private String titular;
 	
 	@Column(nullable=false)

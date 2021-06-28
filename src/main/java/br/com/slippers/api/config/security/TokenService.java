@@ -1,51 +1,51 @@
-// package br.com.slippers.api.config.security;
+package br.com.slippers.api.config.security;
 
-// import java.util.Date;
+import java.util.Date;
 
-// import org.springframework.beans.factory.annotation.Value;
-// import org.springframework.security.core.Authentication;
-// import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Service;
 
-// import br.com.slippers.api.model.Usuario;
-// import io.jsonwebtoken.Claims;
-// import io.jsonwebtoken.Jwts;
-// import io.jsonwebtoken.SignatureAlgorithm;
+import br.com.slippers.api.model.Usuario;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
-// @Service
-// public class TokenService {
+@Service
+public class TokenService {
 	
-// 	@Value("${slippers.jwt.expiration}")
-// 	private String expiration;
+	@Value("${slippers.jwt.expiration}")
+	private String expiration;
 	
-// 	@Value("${slippers.jwt.secret}")
-// 	private String secret;
+	@Value("${slippers.jwt.secret}")
+	private String secret;
 
-// 	public String gerarToken(Authentication authentication) {
-// 		Usuario logado = (Usuario) authentication.getPrincipal();
-// 		Date hoje = new Date();
-// 		Date dataExpiracao = new Date(hoje.getTime() + Long.parseLong(expiration));
+	public String gerarToken(Authentication authentication) {
+		Usuario logado = (Usuario) authentication.getPrincipal();
+		Date hoje = new Date();
+		Date dataExpiracao = new Date(hoje.getTime() + Long.parseLong(expiration));
 		
-// 		return Jwts.builder()
-// 				.setIssuer("API Slippers")
-// 				.setSubject(logado.getIdUsuario().toString())
-// 				.setIssuedAt(hoje)
-// 				.setExpiration(dataExpiracao)
-// 				.signWith(SignatureAlgorithm.HS256, secret)
-// 				.compact();
-// 	}
+		return Jwts.builder()
+				.setIssuer("API Slippers")
+				.setSubject(logado.getIdUsuario().toString())
+				.setIssuedAt(hoje)
+				.setExpiration(dataExpiracao)
+				.signWith(SignatureAlgorithm.HS256, secret)
+				.compact();
+	}
 
-// 	public boolean isTokenValido(String token) {
-// 		try {
-// 			Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token);
-// 			return true;
-// 		} catch (Exception e) {
-// 			return false;
-// 		}
-// 	}
+	public boolean isTokenValido(String token) {
+		try {
+			Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 
-// 	public Long getIdUsuario(String token) {
-// 		Claims claims = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
-// 		return Long.parseLong(claims.getSubject());
-// 	}
+	public Long getIdUsuario(String token) {
+		Claims claims = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
+		return Long.parseLong(claims.getSubject());
+	}
 
-// }
+}

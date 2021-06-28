@@ -9,14 +9,12 @@ public class CartaoDTO {
     private Long id;
     private String titular;
     private String numeroCartao;
-    private String codigoSeguranca;
     private Date vencimento;
 
     public CartaoDTO(Cartao cartao) {
         this.id = cartao.getId();
         this.titular = cartao.getTitular();
-        this.numeroCartao = cartao.getNumeroCartao();
-        this.codigoSeguranca = cartao.getCodigoSeguranca();
+        this.numeroCartao = cartao.getNumeroCartao().substring(0, 3).concat("*******");
         this.vencimento = cartao.getVencimento();
     }
 
@@ -44,15 +42,6 @@ public class CartaoDTO {
     public void setNumeroCartao(String numeroCartao) {
         this.numeroCartao = numeroCartao;
     }
-
-    public String getCodigoSeguranca() {
-        return this.codigoSeguranca;
-    }
-
-    public void setCodigoSeguranca(String codigoSeguranca) {
-        this.codigoSeguranca = codigoSeguranca;
-    }
-
     public Date getVencimento() {
         return this.vencimento;
     }
