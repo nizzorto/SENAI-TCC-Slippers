@@ -16,9 +16,6 @@ public class IndexController {
 	
 	@GetMapping
 	public String index(Model model) {
-		List<Chinelo> chinelos = chineloRepository.findAll();
-		model.addAttribute("chinelos", chinelos);
-		SecurityContextHolder.getContext().getAuthentication().getName();
 		return "index";
 	}
 
