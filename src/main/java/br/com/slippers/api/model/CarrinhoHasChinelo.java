@@ -25,7 +25,6 @@ public class CarrinhoHasChinelo {
     @JoinColumn(name = "chinelo_id")
     private Chinelo chinelo;
     
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "carrinho_id")
     private Carrinho carrinho;
