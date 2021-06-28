@@ -3,6 +3,9 @@ package br.com.slippers.api.dto;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import br.com.slippers.api.model.Chinelo;
+import br.com.slippers.api.model.Tamanho;
+
 //DTO's : classes "cobaia", servindo para transferir dados entre os models e o usuário
 public class ChineloDTO {
     
@@ -18,27 +21,17 @@ public class ChineloDTO {
 	private List<TamanhoDTO> tamanhosDTO;
 
 
-    public ChineloDTO (Long id,
-        String nome,
-        String descricao,
-        double valor,
-        String urlImagem,
-        double mediaNota,
-        int totalVendas,
-        int totalEstrelas,
-        LocalDateTime localDateTime,
-        List<TamanhoDTO> tamanhosDTO
-        ) {
-        this.id = id;
-        this.nome = nome;
-        this.descricao = descricao;
-        this.valor = valor;
-        this.urlImagem = urlImagem;
-        this.mediaNota = mediaNota;
-        this.totalVendas = totalVendas;
-        this.totalEstrelas = totalEstrelas;
-        this.dataCriacao = localDateTime;
-        this.tamanhosDTO = tamanhosDTO;
+    public ChineloDTO (Chinelo chinelo) {
+        this.id = chinelo.getId();
+        this.nome = chinelo.getNome();
+        this.descricao = chinelo.getDescricao();
+        this.valor = chinelo.getValor();
+        this.urlImagem = chinelo.getUrlImagem();
+        this.mediaNota = chinelo.getMediaNota();
+        this.totalVendas = chinelo.getTotalVendas();
+        this.totalEstrelas = chinelo.getTotalEstrelas();
+        this.dataCriacao = chinelo.getDataCriacao();
+        this.tamanhosDTO = Tamanho.toListDTO(chinelo.getTamanhos());
     }    
 
     public Long getId() {

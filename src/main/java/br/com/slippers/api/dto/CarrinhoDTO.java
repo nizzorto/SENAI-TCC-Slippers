@@ -2,30 +2,41 @@ package br.com.slippers.api.dto;
 
 import java.util.List;
 
+import br.com.slippers.api.model.Carrinho;
+import br.com.slippers.api.model.CarrinhoHasChinelo;
+
 //DTO's : classes "cobaia", servindo para transferir dados entre os models e o usuário
 public class CarrinhoDTO {
 
     private Long id;
 	private String emailUsuario;
-	private List<ChineloDTO> chinelosCarrinho;
+	private List<CarrinhoHasChineloDTO> carrinhoHasChinelo;
 	private double totalCarrinho;
 	private int qtdItensCarrinho;
 
     public CarrinhoDTO(
         Long id,
         String emailUsuario,
-        List<ChineloDTO> chinelosCarrinho,
+        List<CarrinhoHasChineloDTO> carrinhoHasChinelo,
         double totalCarrinho,
         int qtdItensCarrinho
         ) {
         this.id = id;
         this.emailUsuario = emailUsuario;
-        this.chinelosCarrinho = chinelosCarrinho;
+        this.carrinhoHasChinelo = carrinhoHasChinelo;
         this.totalCarrinho = totalCarrinho;
         this.qtdItensCarrinho = qtdItensCarrinho;
     }
 
     public CarrinhoDTO(){}
+
+    public CarrinhoDTO(Carrinho carrinho) {
+        this.id = carrinho.getId();
+        this.emailUsuario = carrinho.getUsuario().getEmail();
+        this.totalCarrinho = carrinho.getTotalCarrinho();
+        this.qtdItensCarrinho = carrinho.getQtdItensCarrinho();
+        this.carrinhoHasChinelo = CarrinhoHasChinelo.toListDTO(carrinho.getChinelosCarrinho(), this);
+    }
 
     public Long getId() {
         return this.id;
@@ -43,13 +54,13 @@ public class CarrinhoDTO {
         this.emailUsuario = emailUsuario;
     }
 
-    public List<ChineloDTO> getChinelosCarrinho() {
-        return this.chinelosCarrinho;
+    public List<CarrinhoHasChineloDTO> getChinelosCarrinhoDTO() {
+        return this.carrinhoHasChinelo;
     }
 
-    public void setChinelosCarrinho(List<ChineloDTO> chinelosCarrinho) {
-        this.chinelosCarrinho = chinelosCarrinho;
-    }
+    public void setChinelosCarrinhoDTO(List<CarrinhoHasChineloDTO> carrinhoHasChinelo) {
+        this.carrinhoHasChinelo = carrinhoHasChinelo;
+    }   
 
     public double getTotalCarrinho() {
         return this.totalCarrinho;

@@ -1,17 +1,22 @@
 package br.com.slippers.api.model;
 
+import java.rmi.AlreadyBoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import br.com.slippers.api.dto.CarrinhoDTO;
 
 @Entity
 public class Carrinho {
@@ -20,17 +25,13 @@ public class Carrinho {
 	@Column(nullable=false)
 	private Long id;
 	
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name = "usuario_id", referencedColumnName = "id", nullable = false, unique = true)
 	private Usuario usuario;
 	
-	@ManyToMany
-	@JoinTable(
-		name = "carrinho_has_chinelo",
-		joinColumns = @JoinColumn(name = "carrinho_id"),
-		inverseJoinColumns = @JoinColumn(name = "chinelo_id")
-	)
-	private List<Chinelo> chinelosCarrinho = new ArrayList<Chinelo>();
+	@OneToMany(mappedBy = "carrinho", cascade = CascadeType.ALL)
+	private List<CarrinhoHasChinelo> carrinhoHasChinelo = new ArrayList<CarrinhoHasChinelo>();
 
 	private double totalCarrinho = 0;
 	
@@ -61,12 +62,12 @@ public class Carrinho {
 		this.usuario = usuario;
 	}
 
-	public List<Chinelo> getChinelosCarrinho() {
-		return this.chinelosCarrinho;
+	public List<CarrinhoHasChinelo> getChinelosCarrinho() {
+		return this.carrinhoHasChinelo;
 	}
 
-	public void setChinelosCarrinho(List<Chinelo> chinelosCarrinho) {
-		this.chinelosCarrinho = chinelosCarrinho;
+	public void setChinelosCarrinho(List<CarrinhoHasChinelo> carrinhoHasChinelo) {
+		this.carrinhoHasChinelo = carrinhoHasChinelo;
 	}
 
 	public double getTotalCarrinho() {
@@ -84,8 +85,52 @@ public class Carrinho {
 	public void setQtdItensCarrinho(int qtdItensCarrinho) {
 		this.qtdItensCarrinho = qtdItensCarrinho;
 	}
-	
-	public double calcularTotalCarrinho() {
-			return 0;
+
+	public void addChinelo(Chinelo chinelo, int quantidade) throws AlreadyBoundException {
+		var it = this.carrinhoHasChinelo.iterator();
+		while(it.hasNext()){
+			var chinelosCarrinho = it.next();
+			if(chinelosCarrinho.getChinelo().getId().equals(chinelo.getId())){
+				throw new AlreadyBoundException("Chinelo já inserido! Para colocar mais, altere" +
+				" sua quantidade em: api/carrinho/alterarQtdChineloCarrinho");
+			}
+		}
+		this.carrinhoHasChinelo.add(new CarrinhoHasChinelo(this, chinelo, quantidade));
+		this.calcularCarrinho();
+	}
+
+	public void deleteChinelo(String idChineloDelete) {
+		var it = this.carrinhoHasChinelo.iterator();
+		while(it.hasNext()){
+			var chinelosCarrinho = it.next();
+			if(chinelosCarrinho.getChinelo().getId().equals(Long.parseLong(idChineloDelete))){
+				it.remove();
+				this.calcularCarrinho();
+			}
+		}
+	}
+
+	public void alterarQtdChineloCarrinho(Long idChineloAlt, int quantidade) {
+		var it = this.carrinhoHasChinelo.iterator();
+		while(it.hasNext()){
+			var chinelosCarrinho = it.next();
+			if(chinelosCarrinho.getChinelo().getId().equals(idChineloAlt)){
+				chinelosCarrinho.setQuantidade(quantidade);
+				this.calcularCarrinho();
+			}
+		}
+	}
+
+	public void calcularCarrinho() {
+		this.totalCarrinho = 0;
+		this.qtdItensCarrinho = 0;
+		for (CarrinhoHasChinelo cHasChinelo : this.carrinhoHasChinelo) {
+			this.totalCarrinho += cHasChinelo.getValor();
+			this.qtdItensCarrinho += cHasChinelo.getQuantidade();
+		}
+	}
+
+	public CarrinhoDTO toDTO() {
+		return new CarrinhoDTO(this);
 	}
 }

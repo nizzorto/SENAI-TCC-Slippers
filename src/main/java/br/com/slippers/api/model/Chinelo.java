@@ -12,6 +12,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import org.springframework.data.domain.Page;
+
+import br.com.slippers.api.dto.ChineloDTO;
+import br.com.slippers.api.form.ChineloForm;
+
 @Entity
 public class Chinelo
 {
@@ -59,27 +64,12 @@ public class Chinelo
 	)
 	private List<Tamanho> tamanhos;
 
-	public Chinelo( Long id,
-	String nome,
-	String descricao,
-	double valor,
-	String urlImagem,
-	double mediaNota,
-	int totalVendas,
-	int totalEstrelas,
-	LocalDateTime dataCriacao,
-	List<Tamanho> tamanhos
-	) {
-		this.id = id;
-		this.nome = nome;
-		this.descricao = descricao;
-		this.valor = valor;
-		this.urlImagem = urlImagem;
-		this.mediaNota = mediaNota;
-		this.totalVendas = totalVendas;
-		this.totalEstrelas = totalEstrelas;
-		this.dataCriacao = dataCriacao;
-		this.tamanhos = tamanhos;
+	public Chinelo(ChineloForm cForm, List<Tamanho> tamanhos) {
+		this.setNome(cForm.getNome());
+		this.setDescricao(cForm.getDescricao());
+		this.setValor(Double.parseDouble(cForm.getValor()));
+		this.setUrlImagem(cForm.getUrlImagem());
+		this.setTamanhos(tamanhos);
 	}
 
 	public Chinelo(){}
@@ -162,5 +152,13 @@ public class Chinelo
 	
 	public void setDataCriacao(LocalDateTime dataCriacao) {
 		this.dataCriacao = dataCriacao;
+	}
+
+	public ChineloDTO toDTO() {
+		return new ChineloDTO(this);
+	}
+
+	public static Page<ChineloDTO> toPageDTO(Page<Chinelo> chinelos){
+		return chinelos.map(Chinelo::toDTO);
 	}
 }

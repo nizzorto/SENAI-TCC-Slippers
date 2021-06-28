@@ -22,10 +22,6 @@ public class UsuarioConverter {
     @Autowired
     CartaoConverter cartaoConverter;
 
-    @Autowired
-    CarrinhoConverter carrinhoConverter;
-
-
     public UsuarioDTO toDTO(Usuario usuario) {
         return new UsuarioDTO(
             usuario.getId(),
@@ -35,7 +31,7 @@ public class UsuarioConverter {
             nccConverter.toListDTO(usuario.getNotaChineloCliente()),
             pedidoConverter.toListDTO(usuario.getPedidos()),
             cartaoConverter.toListDTO(usuario.getCartoes()),
-            carrinhoConverter.toDTO(usuario.getCarrinho())
+            usuario.getCarrinho().toDTO()
         );
     }
     

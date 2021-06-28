@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.slippers.api.components.ChineloConverter;
 import br.com.slippers.api.dto.ChineloDTO;
 import br.com.slippers.api.form.ChineloForm;
 import br.com.slippers.api.model.Chinelo;
@@ -46,9 +45,6 @@ public class ChineloRest {
     //@Autowired injetando dependência na classe
     @Autowired
     ChineloRepository chineloR;
-
-    @Autowired
-    ChineloConverter chineloConverter;
     
     @Autowired
     TamanhoRepository tamanhoR;
@@ -75,14 +71,14 @@ public class ChineloRest {
             if(chinelos.isEmpty()) {
                throw new NotFoundException("Não há chinelos no BD");
             }
-            return ResponseEntity.ok(chineloConverter.toPageChineloDTO(chinelos));
+            return ResponseEntity.ok(Chinelo.toPageDTO(chinelos));
         } else {
             
             Page<Chinelo> chinelos = chineloR.findByNome(nomeChinelo, paginacao);
             if(chinelos.isEmpty()) {
                 throw new NotFoundException("Chinelo não encontrado!");
             }
-            return ResponseEntity.ok(chineloConverter.toPageChineloDTO(chinelos));
+            return ResponseEntity.ok(Chinelo.toPageDTO(chinelos));
         }
 	}
 
@@ -104,7 +100,7 @@ public class ChineloRest {
         if(tamanhos.isEmpty()) {
             throw new NotFoundException("Tamanho não encontrado");
         }
-		Chinelo chinelo = chineloConverter.toChinelo(cForm, tamanhos, new Chinelo());
+		Chinelo chinelo = new Chinelo(cForm, tamanhos);
         
         chineloR.save(chinelo);
         /** 
@@ -114,7 +110,7 @@ public class ChineloRest {
 		URI uri = builder.path("/{id}").buildAndExpand(chinelo.getId()).toUri();
 
         //irá retornar o código HTTP 201(created), a localização do item criado e o corpo do item criado
-		return ResponseEntity.created(uri).body(chineloConverter.toDTO(chinelo));
+		return ResponseEntity.created(uri).body(chinelo.toDTO());
 	}
 
     /**
@@ -142,11 +138,14 @@ public class ChineloRest {
          * Como o model chinelo está no estado Managed, ao atualizar
          * seus dados, o JPA detecta e também atualiza no banco.
          */
-        chineloConverter.toChinelo(cForm, tamanhos, chinelo);
-
+        chinelo.setNome(cForm.getNome());
+		chinelo.setDescricao(cForm.getDescricao());
+		chinelo.setValor(Double.parseDouble(cForm.getValor()));
+		chinelo.setUrlImagem(cForm.getUrlImagem());
+		chinelo.setTamanhos(tamanhos);
 
 		// Convertendo o model atualizado do chinelo para um dto e retornando com o código HTTP 200(ok)
-		 return ResponseEntity.ok(chineloConverter.toDTO(chinelo));
+		 return ResponseEntity.ok(chinelo.toDTO());
 	}
 
      /**

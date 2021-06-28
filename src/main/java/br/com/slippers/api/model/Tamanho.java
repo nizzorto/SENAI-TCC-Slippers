@@ -1,5 +1,7 @@
 package br.com.slippers.api.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -41,5 +43,7 @@ public class Tamanho
 		this.descricao = descricao;
 	}
 
-
+    public static List<TamanhoDTO> toListDTO(List<Tamanho> tamanhos) {
+		return tamanhos.stream().map(TamanhoDTO::new).toList();
+    }
 }

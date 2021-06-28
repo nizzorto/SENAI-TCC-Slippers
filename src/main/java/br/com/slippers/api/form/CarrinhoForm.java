@@ -1,22 +1,33 @@
 package br.com.slippers.api.form;
 
-import java.util.List;
-
-import javax.validation.constraints.NotEmpty;
-
-import br.com.slippers.api.model.Chinelo;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 public class CarrinhoForm {
     
-    @NotEmpty
-    private List<Chinelo> chinelosCarrinho;
+    @Min(value = 1, message = "Quantidade deve ser maior que 0!")
+    @Max(value = 100, message = "Quantidade deve ser menor que 100!")
+    private Long idChinelo;
 
-    public List<Chinelo> getChinelosCarrinho() {
-        return this.chinelosCarrinho;
+    @Min(value = 1, message = "Quantidade deve ser maior que 0!")
+    @Max(value = 100, message = "Quantidade deve ser menor que 100!")
+    private int quantidade;
+
+    public Long getIdChinelo() {
+        return this.idChinelo;
     }
 
-    public void setChinelosCarrinho(List<Chinelo> chinelosCarrinho) {
-        this.chinelosCarrinho = chinelosCarrinho;
+    public void setIdChinelo(Long idChinelo) {
+        this.idChinelo = idChinelo;
+    }
+    
+
+    public int getQuantidade() {
+        return this.quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 
 }
