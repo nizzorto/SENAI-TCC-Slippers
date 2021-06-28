@@ -2,6 +2,8 @@ package br.com.slippers.api.dto;
 
 import java.sql.Date;
 
+import br.com.slippers.api.model.Cartao;
+
 public class CartaoDTO {
 
     private Long id;
@@ -10,18 +12,12 @@ public class CartaoDTO {
     private String codigoSeguranca;
     private Date vencimento;
 
-    public CartaoDTO(
-    Long id,
-    String titular,
-    String numeroCartao,
-    String codigoSeguranca,
-    Date vencimento
-    ) {
-        this.id = id;
-        this.titular = titular;
-        this.numeroCartao = numeroCartao;
-        this.codigoSeguranca = codigoSeguranca;
-        this.vencimento = vencimento;
+    public CartaoDTO(Cartao cartao) {
+        this.id = cartao.getId();
+        this.titular = cartao.getTitular();
+        this.numeroCartao = cartao.getNumeroCartao();
+        this.codigoSeguranca = cartao.getCodigoSeguranca();
+        this.vencimento = cartao.getVencimento();
     }
 
 

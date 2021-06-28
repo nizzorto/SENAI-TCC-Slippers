@@ -15,6 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import br.com.slippers.api.dto.PedidoDTO;
+
 @Entity
 public class Pedido {
 	
@@ -94,4 +96,11 @@ public class Pedido {
 		this.statusPedido = statusPedido;
 	}
 	
+	public PedidoDTO toDTO() {
+        return new PedidoDTO(this);
+    }
+    
+    public static List<PedidoDTO> toListDTO(List<Pedido> pedidos){
+        return pedidos.stream().map(Pedido::toDTO).toList();
+    }
 }

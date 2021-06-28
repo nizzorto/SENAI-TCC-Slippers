@@ -10,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import br.com.slippers.api.dto.CarrinhoDTO;
 import br.com.slippers.api.dto.CarrinhoHasChineloDTO;
 

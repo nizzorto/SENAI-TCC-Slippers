@@ -1,12 +1,15 @@
 package br.com.slippers.api.model;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import br.com.slippers.api.dto.CartaoDTO;
 
 @Entity
 public class Cartao {
@@ -68,4 +71,11 @@ public class Cartao {
 		this.vencimento = vencimento;
 	}
 
+	public CartaoDTO toDTO() {
+        return new CartaoDTO(this);
+    }
+    
+    public static List<CartaoDTO> toListDTO(List<Cartao> cartoes){
+        return cartoes.stream().map(Cartao::toDTO).toList();
+    }
 }

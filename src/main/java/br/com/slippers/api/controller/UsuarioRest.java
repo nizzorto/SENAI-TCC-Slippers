@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.slippers.api.components.UsuarioConverter;
 import br.com.slippers.api.dto.UsuarioDTO;
 import br.com.slippers.api.form.UsuarioForm;
 import br.com.slippers.api.model.Usuario;
@@ -49,9 +48,6 @@ public class UsuarioRest {
         CartaoRepository cartaoR;
 
         @Autowired
-        UsuarioConverter usuarioConverter;
-
-        @Autowired
         CarrinhoRepository carrinhoRepository;
 
         @GetMapping
@@ -63,7 +59,7 @@ public class UsuarioRest {
             if(usuario.isEmpty()) {
                 throw new NotFoundException("Usuário não encontrado!");
             }
-            return ResponseEntity.ok(usuarioConverter.toDTO(usuario.get()));
+            return ResponseEntity.ok(usuario.get().toDTO());
         }
     
     
@@ -74,12 +70,12 @@ public class UsuarioRest {
         public ResponseEntity<UsuarioDTO> newUsuario(@RequestBody @Valid UsuarioForm uForm,
         UriComponentsBuilder builder) {
     
-            Usuario usuario = usuarioConverter.toUsuario(uForm, new Usuario());
+            Usuario usuario = Usuario.toUsuario(uForm);
             usuarioR.save(usuario);
             
             URI uri = builder.path("/{id}").buildAndExpand(usuario.getId()).toUri();
     
-            return ResponseEntity.created(uri).body(usuarioConverter.toDTO(usuario));
+            return ResponseEntity.created(uri).body(usuario.toDTO());
         }
 
 

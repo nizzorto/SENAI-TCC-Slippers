@@ -127,6 +127,24 @@
 			<artifactId>spring-boot-admin-starter-client</artifactId>
 			<version>2.1.4</version>
 		</dependency>
+		
+		<!-- _______________ WEB FLUX _______________ -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
+			<version>2.5.2</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.projectreactor</groupId>
+			<artifactId>reactor-spring</artifactId>
+			<version>1.0.1.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
 	</dependencies>
 
 	<build>

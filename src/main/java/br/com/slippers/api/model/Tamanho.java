@@ -7,8 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import br.com.slippers.api.dto.TamanhoDTO;
+import br.com.slippers.api.form.TamanhoForm;
 
 @Entity
 public class Tamanho
@@ -45,5 +45,11 @@ public class Tamanho
 
     public static List<TamanhoDTO> toListDTO(List<Tamanho> tamanhos) {
 		return tamanhos.stream().map(TamanhoDTO::new).toList();
+    }
+
+    public static Tamanho toTamanho(TamanhoForm tForm) {
+        Tamanho tamanho = new Tamanho();
+		tamanho.descricao = tForm.getDescricao();
+		return tamanho;
     }
 }

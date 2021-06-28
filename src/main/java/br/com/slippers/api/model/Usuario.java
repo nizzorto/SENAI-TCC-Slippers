@@ -16,6 +16,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import br.com.slippers.api.dto.UsuarioDTO;
+import br.com.slippers.api.form.UsuarioForm;
+
 // import org.springframework.security.core.GrantedAuthority;
 // import org.springframework.security.core.userdetails.UserDetails;
 
@@ -54,7 +57,13 @@ public class Usuario /* implements UserDetails */{
 	@Column(nullable=true)
 	private int totalCompras = 0;
 	
-
+	@ManyToMany(cascade = CascadeType.REMOVE)
+	@JoinTable(
+		name = "usuario_has_endereco",
+		joinColumns = @JoinColumn(name = "cliente_id"),
+		inverseJoinColumns = @JoinColumn(name = "endereco_id")
+	)
+	private List<Endereco> enderecos = new ArrayList<Endereco>();
 	/**
 	 * Entidade com os perfis deste usuário (se é um cliente, administrador, etc.)
 	 * Necessário para o funcionamento do spring security.
@@ -87,7 +96,7 @@ public class Usuario /* implements UserDetails */{
 	/**
 	 * Cartões de crédito do cliente
 	 * (Em breve substituído pela API do MercadoPago)
-	 *
+	 * TODO CARTAO
 	 * @ManyToMany deve ter uma tabela de relacionamento.
 	 * a JPA automaticamente cria uma tabela de relacionamento quando se depara com
 	 * esta anotação.
@@ -200,6 +209,31 @@ public class Usuario /* implements UserDetails */{
 	public void setCarrinho(Carrinho carrinho) {
 		this.carrinho = carrinho;
 	}
+
+	public List<Endereco> getEnderecos() {
+		return this.enderecos;
+	}
+
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
+	}
+
+    public static List<UsuarioDTO> toListDTO(List<Usuario> usuarios) {
+		return usuarios.stream().map(Usuario::toDTO).toList();
+    }
+
+	public UsuarioDTO toDTO() {
+        return new UsuarioDTO(this);
+    }
+
+    public static Usuario toUsuario(UsuarioForm uForm) {
+		Usuario usuario = new Usuario();
+		usuario.email = uForm.getEmail();
+		usuario.nome = uForm.getNome();
+		usuario.senha = uForm.getSenha();
+		return usuario;
+    }
+
 
 	// /**
 	//  * Mostra ao spring que aqui é onde pega a senha

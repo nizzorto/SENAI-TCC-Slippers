@@ -1,17 +1,30 @@
 package br.com.slippers.api.dto;
 
+import br.com.slippers.api.model.NotaChineloCliente;
+
 public class NotaChineloClienteDTO {
     
+    private Long id;
     private UsuarioDTO usuario;
     private ChineloDTO chinelo;
     private double nota;
 
 
 
-    public NotaChineloClienteDTO(UsuarioDTO usuario, ChineloDTO chinelo, double nota) {
-        this.usuario = usuario;
-        this.chinelo = chinelo;
-        this.nota = nota;
+
+    public NotaChineloClienteDTO(NotaChineloCliente notaChineloCliente) {
+        this.usuario = notaChineloCliente.getUsuario().toDTO();
+        this.chinelo = notaChineloCliente.getChinelo().toDTO();
+        this.nota = notaChineloCliente.getNota();
+    }
+
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 

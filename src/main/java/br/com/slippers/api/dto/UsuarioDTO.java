@@ -1,6 +1,10 @@
 package br.com.slippers.api.dto;
 
 import java.util.List;
+import br.com.slippers.api.model.Cartao;
+import br.com.slippers.api.model.NotaChineloCliente;
+import br.com.slippers.api.model.Pedido;
+import br.com.slippers.api.model.Usuario;
 
 public class UsuarioDTO {
 
@@ -29,6 +33,18 @@ public class UsuarioDTO {
     this.pedidosDTO = pedidosDTO;
     this.cartoesDTO = cartoesDTO;
     this.carrinhoDTO = carrinhoDTO;
+    }
+
+
+    public UsuarioDTO(Usuario usuario) {
+        this.id = usuario.getId();
+        this.nome = usuario.getNome();
+        this.email = usuario.getEmail();
+        this.totalCompras = usuario.getTotalCompras();
+        this.notaChineloClientesDTO = NotaChineloCliente.toListDTO(usuario.getNotaChineloCliente());
+        this.pedidosDTO = Pedido.toListDTO(usuario.getPedidos());
+        this.cartoesDTO = Cartao.toListDTO(usuario.getCartoes());
+        this.carrinhoDTO = usuario.getCarrinho().toDTO();
     }
 
 

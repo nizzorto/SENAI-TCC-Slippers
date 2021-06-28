@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.com.slippers.api.model.Cartao;
 import br.com.slippers.api.model.Chinelo;
+import br.com.slippers.api.model.Pedido;
 import br.com.slippers.api.model.StatusPedido;
 import br.com.slippers.api.model.Usuario;
 
@@ -16,18 +17,13 @@ public class PedidoDTO {
     private Cartao cartaoPagamento;
     private StatusPedido statusPedido;
 
-    public PedidoDTO(Long id,
-    Usuario usuario,
-    double totalPedido,
-    List<Chinelo> chinelosPedido,
-    Cartao cartaoPagamento,
-    StatusPedido statusPedido) {
-        this.id = id;
-        this.usuario = usuario;
-        this.totalPedido = totalPedido;
-        this.chinelosPedido = chinelosPedido;
-        this.cartaoPagamento = cartaoPagamento;
-        this.statusPedido = statusPedido;
+    public PedidoDTO(Pedido pedido) {
+        this.id = pedido.getId();
+        this.usuario = pedido.getUsuario();
+        this.totalPedido = pedido.getTotalPedido();
+        this.chinelosPedido = pedido.getChinelosPedido();
+        this.cartaoPagamento = pedido.getCartaoPagamento();
+        this.statusPedido = pedido.getStatusPedido();
     }
 
     public Long getId() {

@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.slippers.api.components.TamanhoConverter;
 import br.com.slippers.api.dto.TamanhoDTO;
 import br.com.slippers.api.form.TamanhoForm;
 import br.com.slippers.api.model.Tamanho;
@@ -35,9 +34,6 @@ public class TamanhoRest {
     //@Autowired injetando dependência na classe
     @Autowired
     TamanhoRepository tamanhoR;
-
-    @Autowired
-    TamanhoConverter tamanhoConverter;
     
     /**
      * @GetMapping mapear requisição get para buscar um ou vários tamanhos
@@ -59,7 +55,7 @@ public class TamanhoRest {
         if(tamanhos.isEmpty()) {
             throw new NotFoundException("Não há tamanhos cadastrados no BD");
         }
-        return ResponseEntity.ok(tamanhoConverter.toListTamanhoDTO(tamanhos));
+        return ResponseEntity.ok(Tamanho.toListDTO(tamanhos));
     }
 
 
@@ -73,10 +69,10 @@ public class TamanhoRest {
     @PostMapping
     @Transactional
     @CacheEvict(value = "listaChinelos", allEntries = true)
-	public ResponseEntity<TamanhoDTO> newTamanho(@RequestBody @Valid TamanhoForm cForm,
+	public ResponseEntity<TamanhoDTO> newTamanho(@RequestBody @Valid TamanhoForm tForm,
     UriComponentsBuilder builder) throws NotFoundException {
 
-		Tamanho tamanho = tamanhoConverter.toTamanho(cForm, new Tamanho());
+		Tamanho tamanho = Tamanho.toTamanho(tForm);
         tamanhoR.save(tamanho);
         /** 
          * {id} caminho variável, irá receber o id do tamanho criado
@@ -97,7 +93,7 @@ public class TamanhoRest {
 	@Transactional
     @CacheEvict(value = "listaChinelos", allEntries = true)
 	public ResponseEntity<TamanhoDTO> updateTamanho(@PathVariable(value = "id") Long id,
-			@Valid @RequestBody TamanhoForm cForm) throws NotFoundException {
+			@Valid @RequestBody TamanhoForm tForm) throws NotFoundException {
 
 		// Buscando o tamanho por id no banco de dados. Caso não encontre irá jogar uma NotFoundException
 		Tamanho tamanho = tamanhoR.findById(id).orElseThrow(()
@@ -108,7 +104,7 @@ public class TamanhoRest {
          * Como o model tamanho está no estado Managed, ao atualizar
          * seus dados, o JPA detecta e também atualiza no banco.
          */
-        tamanhoConverter.toTamanho(cForm, tamanho);
+        Tamanho.toTamanho(tForm);
 		// Convertendo o model atualizado do tamanho para um dto e retornando com o código HTTP 200(ok)
 		 return ResponseEntity.ok(new TamanhoDTO(tamanho));
 	}
