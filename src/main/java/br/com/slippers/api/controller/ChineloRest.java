@@ -90,7 +90,7 @@ public class ChineloRest {
      * @Valid irá validar os dados transferidos ao ChineloForm
      * @UriComponentsBuilder irá construir uma nova URL
      */
-    @PostMapping
+    @PostMapping("/inserirChinelo")
     @Transactional
     @CacheEvict(value = "listaChinelos", allEntries = true)
 	public ResponseEntity<ChineloDTO> newChinelo(@RequestBody @Valid ChineloForm cForm,

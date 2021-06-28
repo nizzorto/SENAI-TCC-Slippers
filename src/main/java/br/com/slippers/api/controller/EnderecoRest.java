@@ -23,7 +23,7 @@ public class EnderecoRest {
     @Autowired
 	private EnderecoService enderecoService;
 
-    @PostMapping
+    @PostMapping("/inserirEndereco")
     @Transactional
 	public ResponseEntity<EnderecoDTO> newEndereco(@RequestBody @Valid CepForm cepForm,
     UriComponentsBuilder builder) throws NotFoundException {

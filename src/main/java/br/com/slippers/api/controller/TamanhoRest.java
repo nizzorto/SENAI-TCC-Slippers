@@ -66,7 +66,7 @@ public class TamanhoRest {
      * @Valid irá validar os dados transferidos ao TamanhoForm
      * @UriComponentsBuilder irá construir uma nova URL
      */
-    @PostMapping
+    @PostMapping("/inserirTamanho")
     @Transactional
     @CacheEvict(value = "listaChinelos", allEntries = true)
 	public ResponseEntity<TamanhoDTO> newTamanho(@RequestBody @Valid TamanhoForm tForm,

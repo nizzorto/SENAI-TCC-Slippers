@@ -64,7 +64,7 @@ public class UsuarioRest {
     
     
 
-        @PostMapping
+        @PostMapping("/inserirUsuario")
         @Transactional
         @CacheEvict(value = "listaUsuario", allEntries = true)
         public ResponseEntity<UsuarioDTO> newUsuario(@RequestBody @Valid UsuarioForm uForm,
