@@ -1,6 +1,6 @@
 <html>   
     <head></head>
-    <body>
+    <body th:fragment="body">
    <!--barra de navegaçãp-->
     <nav>
         <!--redes sociais e telefone-->
@@ -93,11 +93,13 @@
             </a>
             <strong>Criar Conta</strong>
             <!--inputs-->
-            <form>
-                <input type="text" name="fullname" placeholder="Nome Completo" required />
-                <input type="email" name="email" placeholder="Example@gmail.com" required />
-                <input type="password" name="password" placeholder="Senha" required />
+            <form th:action="@{/api/usuario}" method="post">
+                <input type="text" name="fullname" for="nome" placeholder="Nome Completo" required />
+                <input type="email" name="email" for="email" placeholder="Example@gmail.com" required />
+                <input type="password" name="password" for="senha" placeholder="Senha" required />
                 <input type="submit" value="Criar Conta" />
+            </form>
+                </div>
             </form>
             <!--botao esqueceu senha e criar conta-->
             <div class="form-btns">
@@ -115,10 +117,5 @@
             </a>
         </div>
     </div>
-    <script>
-        function onLoad()
-    </script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </body>
 </html>
