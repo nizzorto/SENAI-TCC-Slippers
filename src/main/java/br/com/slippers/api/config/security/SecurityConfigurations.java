@@ -79,7 +79,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 		.antMatchers("/", "/css/**", "/images/**", "/img/**", "/js/**", "/h2-console/**").permitAll()
 		.antMatchers(HttpMethod.GET, "/api/chinelo").permitAll()
         .antMatchers("/api/auth").permitAll()
-		.antMatchers("/swagger-ui/**").hasAuthority("ADMIN")
+		.antMatchers("/swagger-ui.html/**").hasAuthority("ADMIN")
 		.anyRequest().authenticated()
         .and().csrf().disable()
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
