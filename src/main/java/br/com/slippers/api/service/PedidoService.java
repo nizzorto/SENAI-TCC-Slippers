@@ -44,7 +44,7 @@ public class PedidoService {
         
         Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        Optional<Carrinho> carrinho = carrinhoR.findByUsuario(usuario);
+        Optional<Carrinho> carrinho = carrinhoR.findByUsuarioEmail(usuario.getEmail());
          if(carrinho.isEmpty()) {
              throw new NotFoundException("Carrinho não encontrado!");
          }

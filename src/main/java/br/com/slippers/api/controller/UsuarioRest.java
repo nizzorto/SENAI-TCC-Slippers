@@ -1,17 +1,11 @@
 package br.com.slippers.api.controller;
 
-import java.net.URI;
-import java.util.Optional;
-
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,12 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.slippers.api.dto.UsuarioDTO;
 import br.com.slippers.api.form.UsuarioForm;
-import br.com.slippers.api.model.Usuario;
-import br.com.slippers.api.repository.CarrinhoRepository;
-import br.com.slippers.api.repository.CartaoRepository;
-import br.com.slippers.api.repository.NotaChineloClienteRepository;
-import br.com.slippers.api.repository.PedidoRepository;
-import br.com.slippers.api.repository.UsuarioRepository;
+import br.com.slippers.api.service.UsuarioService;
 import javassist.NotFoundException;
 
 @RestController
@@ -36,46 +25,23 @@ import javassist.NotFoundException;
 public class UsuarioRest {
 
         @Autowired
-        UsuarioRepository usuarioR;
+        UsuarioService uService;
 
-        @Autowired
-        NotaChineloClienteRepository nccRepository;
-
-        @Autowired
-        PedidoRepository pedidosR;
-
-        @Autowired
-        CartaoRepository cartaoR;
-
-        @Autowired
-        CarrinhoRepository carrinhoRepository;
-
-        @GetMapping
+        @GetMapping("/buscarEmail")
         @Cacheable(value = "listaUsuario")
-        public ResponseEntity<?> listUsuarios(@RequestParam(required = true) String email,
-        @PageableDefault(sort = "nome", direction = Direction.DESC, page = 0, size = 15) Pageable paginacao) 
-        throws NotFoundException {
-            Optional<Usuario> usuario = usuarioR.findByEmail(email);
-            if(usuario.isEmpty()) {
-                throw new NotFoundException("Usuário não encontrado!");
-            }
-            return ResponseEntity.ok(usuario.get().toDTO());
+        public ResponseEntity<?> listUsuarios(@RequestParam(required = false) String email,
+        @RequestParam(required = true) int pagina, @RequestParam(required = true) int qtdItensPorPagina) throws NotFoundException {
+            
+            return uService.listUsuarios(email, pagina, qtdItensPorPagina);
         }
-    
-    
 
         @PostMapping("/inserirUsuario")
         @Transactional
         @CacheEvict(value = "listaUsuario", allEntries = true)
         public ResponseEntity<UsuarioDTO> newUsuario(@RequestBody @Valid UsuarioForm uForm,
         UriComponentsBuilder builder) {
-            
-            Usuario usuario = Usuario.toUsuario(uForm);
-            usuarioR.save(usuario);
-            
-            URI uri = builder.path("/{id}").buildAndExpand(usuario.getId()).toUri();
-    
-            return ResponseEntity.created(uri).body(usuario.toDTO());
+
+            return uService.newUsuario(uForm, builder);
         }
 
 

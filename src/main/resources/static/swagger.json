@@ -1,0 +1,1074 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Esta é a documentação swagger da API para o TCC e-commerce de chinelos, ainda não está implementada e ainda faltam algumas actions, mas pretendemos continuar o projeto até o fim.",
+    "version": "1.0.0",
+    "title": "Slippers Swagger",
+    "contact": {
+      "email": "andrey_coradin@hotmail.com"
+    }
+  },
+  "host": "localhost:8080",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "Login",
+      "description": "Autenticar o usuário para retornar seu bearer token"
+    },
+    {
+      "name": "Usuário",
+      "description": "Operações com usuário"
+    },
+    {
+      "name": "Endereço",
+      "description": "Operações com endereço"
+    },
+    {
+      "name": "Chinelo",
+      "description": "Operações com os chinelos"
+    },
+    {
+      "name": "Tamanho",
+      "description": "Operações com tamanhos dos chinelos"
+    },
+    {
+      "name": "Carrinho",
+      "description": "Operações com o carrinho"
+    },
+    {
+      "name": "Pedido",
+      "description": "Operações com pedidos"
+    }
+  ],
+  "paths": {
+    "/usuario/inserirUsuario": {
+      "post": {
+        "tags": [
+          "Usuário"
+        ],
+        "summary": "Criação de usuário",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objeto para criação de usuário",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CriaUsuario"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/usuario/buscarEmail": {
+      "get": {
+        "tags": [
+          "Usuário"
+        ],
+        "summary": "Encontra um usuário pelo email, ou busca todos",
+        "description": "Função disponível apenas para o ADM",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pagina",
+            "in": "query",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "qtdItensPorPagina",
+            "in": "query",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/auth": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "description": "Retorna um token bearer para a autenticação do usuário, necessário para algumas funcionalidades do site",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objeto para login do usuário",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Login"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          },
+          "400": {
+            "description": "Usuário e/ou Senha Incorretos"
+          }
+        }
+      }
+    },
+    "/endereco/buscarEnderecos": {
+      "get": {
+        "tags": [
+          "Endereço"
+        ],
+        "summary": "Busque seus endereços",
+        "description": "Buscar os endereços do usuário logado",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/EnderecoRetorno"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/400"
+            }
+          },
+          "403": {
+            "description": "Deves colocar o token do usuário logado na header da requisição HTTP"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/endereco/inserirEndereco": {
+      "post": {
+        "tags": [
+          "Endereço"
+        ],
+        "description": "Coloque um cep, e retornaremos o endereço completo.",
+        "summary": "Inserção de endereços",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objeto para criação de endereço",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnderecoInsert"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/EnderecoRetorno"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/400"
+            }
+          },
+          "403": {
+            "description": "Deves colocar o token do usuário logado na header da requisição HTTP"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/chinelo/listaChinelos": {
+      "get": {
+        "tags": [
+          "Chinelo"
+        ],
+        "summary": "Busca de chinelos",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nomeChinelo",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Nome do chinelo que você quer buscar. Caso não coloque nada, será retornada uma lista com todos os chinelos"
+          },
+          {
+            "name": "pagina",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Página da paginação"
+          },
+          {
+            "name": "qtdItensPagina",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Quantidade de itens por página."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Chinelo"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/400"
+            }
+          }
+        }
+      }
+    },
+    "/chinelo/inserirChinelo": {
+      "post": {
+        "tags": [
+          "Chinelo"
+        ],
+        "summary": "Inserção de chinelo",
+        "description": "Apenas ADM pode usar esta função",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objeto para criação de chinelo",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChineloForm"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Chinelo"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/400"
+            }
+          },
+          "403": {
+            "description": "Deves colocar o token do usuário logado na header da requisição HTTP"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/chinelo/atualizarChinelo/{id}": {
+      "put": {
+        "tags": [
+          "Chinelo"
+        ],
+        "summary": "Atualização de chinelos",
+        "description": "Apenas ADM pode usar esta função",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "description": "id do chinelo a ser atualizado",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objeto para atualização de chinelo. Tudo será alterado, por isso, preencha todos os campos",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChineloForm"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Chinelo"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/400"
+            }
+          },
+          "403": {
+            "description": "Deves colocar o token do usuário logado na header da requisição HTTP"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/chinelo/deletarChinelo/{id}": {
+      "delete": {
+        "tags": [
+          "Chinelo"
+        ],
+        "summary": "Deleção de chinelos",
+        "description": "Apenas ADM tem acesso à esta função",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "description": "id do chinelo a ser apagado",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Apagado com sucesso"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Deves colocar o token do usuário logado na header da requisição HTTP"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/tamanho/listaTamanhos": {
+      "get": {
+        "tags": [
+          "Tamanho"
+        ],
+        "summary": "Busca de Tamanhos",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Tamanho"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/400"
+            }
+          }
+        }
+      }
+    },
+    "/tamanho/inserirTamanho": {
+      "post": {
+        "tags": [
+          "Tamanho"
+        ],
+        "summary": "Inserção de tamanho",
+        "description": "Apenas ADM tem acesso à esta função",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objeto para criação de tamanho",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TamanhoForm"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Tamanho"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/400"
+            }
+          },
+          "403": {
+            "description": "Deves colocar o token do usuário logado na header da requisição HTTP"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/tamanho/alterarTamanho/{id}": {
+      "put": {
+        "tags": [
+          "Tamanho"
+        ],
+        "summary": "Atualização de tamanhos",
+        "description": "Apenas ADM tem acesso à esta função",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "description": "id do tamanho a ser atualizado",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objeto para alteração de tamanho",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TamanhoForm"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Tamanho"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/400"
+            }
+          },
+          "403": {
+            "description": "Deves colocar o token do usuário logado na header da requisição HTTP"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/tamanho/deletarTamanho/{id}": {
+      "delete": {
+        "tags": [
+          "Tamanho"
+        ],
+        "summary": "Deleção de tamanho",
+        "description": "Apenas ADM tem acesso à esta função",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "description": "id do tamanho a ser deletado",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Apagado com sucesso"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Deves colocar o token do usuário logado na header da requisição HTTP"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/carrinho/inserirChinelo": {
+      "post": {
+        "tags": [
+          "Carrinho"
+        ],
+        "summary": "Inserção de chinelo no carrinho",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objeto para inserção de chinelo no carrinho",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CarrinhoForm"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Carrinho"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/400"
+            }
+          },
+          "403": {
+            "description": "Deves colocar o token do usuário logado na header da requisição HTTP"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/carrinho/listarChinelos": {
+      "get": {
+        "tags": [
+          "Carrinho"
+        ],
+        "summary": "Busca de Chinelos no carrinho",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Carrinho"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/400"
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/carrinho/alterarQtdChineloCarrinho": {
+      "put": {
+        "tags": [
+          "Carrinho"
+        ],
+        "summary": "Atualização de carrinho",
+        "description": "Atualização do carrinho",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objeto para alterar chinelo do carrinho",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CarrinhoForm"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Carrinho"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/400"
+            }
+          },
+          "403": {
+            "description": "Deves colocar o token do usuário logado na header da requisição HTTP"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/carrinho/deletarChinelo/{id}": {
+      "delete": {
+        "tags": [
+          "Carrinho"
+        ],
+        "summary": "Remoção de chinelo do carrinho",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "description": "id do chinelo a ser deletado",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Apagado com sucesso",
+            "schema": {
+              "$ref": "#/definitions/Carrinho"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Deves colocar o token do usuário logado na header da requisição HTTP"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/pedido/realizarPedido": {
+      "post": {
+        "tags": [
+          "Pedido"
+        ],
+        "summary": "Realização de pedido",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Objeto para realização de pedido",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PedidoForm"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Pedido"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/400"
+            }
+          },
+          "403": {
+            "description": "Deves colocar o token do usuário logado na header da requisição HTTP"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "Insira aqui o token resgatado.\nFormato: Bearer {token}\nExemplo: Bearer n8we9f9iom1f3289fj12f2mof123f9m2.f23"
+    }
+  },
+  "definitions": {
+    "400": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Mensagem de erro"
+        }
+      }
+    },
+    "CriaUsuario": {
+      "type": "object",
+      "required": [
+        "name",
+        "photoUrls"
+      ],
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "email@example.com"
+        },
+        "nome": {
+          "type": "string"
+        },
+        "senha": {
+          "type": "string"
+        }
+      }
+    },
+    "Login": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "administrador@email.com"
+        },
+        "senha": {
+          "type": "string",
+          "example": "abc123456"
+        }
+      }
+    },
+    "Token": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        },
+        "tipo": {
+          "type": "string",
+          "example": "Bearer"
+        }
+      }
+    },
+    "EnderecoInsert": {
+      "type": "object",
+      "properties": {
+        "cep": {
+          "type": "string",
+          "example": "12345678"
+        },
+        "complemento": {
+          "type": "string"
+        },
+        "numero": {
+          "type": "string"
+        }
+      }
+    },
+    "EnderecoRetorno": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "emailUsuarios": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "logradouro": {
+          "type": "string"
+        },
+        "bairro": {
+          "type": "string"
+        },
+        "cidade": {
+          "type": "string"
+        },
+        "complemento": {
+          "type": "string"
+        },
+        "numero": {
+          "type": "string"
+        },
+        "uf": {
+          "type": "string"
+        }
+      }
+    },
+    "Chinelo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "nome": {
+          "type": "string"
+        },
+        "descricao": {
+          "type": "string"
+        },
+        "valor": {
+          "type": "number"
+        },
+        "urlImagem": {
+          "type": "string"
+        },
+        "mediaNota": {
+          "type": "integer"
+        },
+        "totalVendas": {
+          "type": "integer"
+        },
+        "totalEstrelas": {
+          "type": "integer"
+        },
+        "dataCriacao": {
+          "type": "string",
+          "example": "2020-05-05T12:35:47"
+        },
+        "tamanhosDTO": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/Tamanho"
+          }
+        }
+      }
+    },
+    "Tamanho": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "descricao": {
+          "type": "string",
+          "example": "40"
+        }
+      }
+    },
+    "ChineloForm": {
+      "type": "object",
+      "properties": {
+        "nome": {
+          "type": "string"
+        },
+        "descricao": {
+          "type": "string"
+        },
+        "urlImagem": {
+          "type": "string"
+        },
+        "valor": {
+          "type": "number"
+        },
+        "idTamanhos": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "example": 1
+          }
+        }
+      }
+    },
+    "TamanhoForm": {
+      "type": "object",
+      "properties": {
+        "descricao": {
+          "type": "string",
+          "example": "39/40"
+        }
+      }
+    },
+    "CarrinhoForm": {
+      "type": "object",
+      "properties": {
+        "idChinelo": {
+          "type": "integer"
+        },
+        "quantidade": {
+          "type": "integer"
+        }
+      }
+    },
+    "Carrinho": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "emailUsuario": {
+          "type": "string"
+        },
+        "valorTotalCarrinho": {
+          "type": "number"
+        },
+        "quantidadeItensCarrinho": {
+          "type": "integer"
+        },
+        "chinelosCarrinho": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/Chinelo"
+          }
+        }
+      }
+    },
+    "PedidoForm": {
+      "type": "object",
+      "properties": {
+        "idCartao": {
+          "type": "integer"
+        },
+        "idEndereco": {
+          "type": "integer"
+        }
+      }
+    },
+    "Pedido": {
+      "type": "object",
+      "properties": {
+        "carrinhoPedido": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/Carrinho"
+          }
+        },
+        "cartaoPagamento": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/defititions"
+          }
+        }
+      }
+    }
+  }
+}

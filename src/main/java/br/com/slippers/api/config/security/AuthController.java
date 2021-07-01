@@ -1,4 +1,4 @@
-package br.com.slippers.api.controller;
+package br.com.slippers.api.config.security;
 
 import javax.validation.Valid;
 
@@ -13,10 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.com.slippers.api.config.security.LoginForm;
-import br.com.slippers.api.config.security.TokenDTO;
-import br.com.slippers.api.config.security.TokenService;
-
 @Controller
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -30,13 +26,10 @@ public class AuthController {
 	@PostMapping
 	public ResponseEntity<TokenDTO> autenticar(@RequestBody @Valid LoginForm form) {
 		UsernamePasswordAuthenticationToken dadosLogin = form.convert();
-		try {
-			Authentication authentication = authManager.authenticate(dadosLogin);
-			String token = tokenService.gerarToken(authentication);
-			return ResponseEntity.ok(new TokenDTO(token, "Bearer"));
-		} catch (AuthenticationException e) {
-			return ResponseEntity.badRequest().build();
-		}
+		Authentication authentication = authManager.authenticate(dadosLogin);
+		String token = tokenService.gerarToken(authentication);
+		return ResponseEntity.ok(new TokenDTO(token, "Bearer"));
+
 	}
 	
 	

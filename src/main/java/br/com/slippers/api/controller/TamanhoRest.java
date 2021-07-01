@@ -1,6 +1,5 @@
 package br.com.slippers.api.controller;
 
-import java.net.URI;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -17,14 +16,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.slippers.api.dto.TamanhoDTO;
 import br.com.slippers.api.form.TamanhoForm;
 import br.com.slippers.api.model.Tamanho;
-import br.com.slippers.api.repository.TamanhoRepository;
+import br.com.slippers.api.service.TamanhoService;
 import javassist.NotFoundException;
 
 @RestController
@@ -33,7 +31,7 @@ public class TamanhoRest {
     
     //@Autowired injetando dependência na classe
     @Autowired
-    TamanhoRepository tamanhoR;
+    TamanhoService tService;
     
     /**
      * @GetMapping mapear requisição get para buscar um ou vários tamanhos
@@ -46,16 +44,11 @@ public class TamanhoRest {
      * page: página atual, começa com 0
      * size: quantidade de itens por página, definido 15
      */ 
-    @GetMapping
+    @GetMapping("/listaTamanhos")
     @Cacheable(value = "listaChinelos")
-	public ResponseEntity<List<TamanhoDTO>> listTamanhos(@RequestParam(required = false)
-    String descricao) throws NotFoundException {
-        
-        List<Tamanho> tamanhos = tamanhoR.findAll();
-        if(tamanhos.isEmpty()) {
-            throw new NotFoundException("Não há tamanhos cadastrados no BD");
-        }
-        return ResponseEntity.ok(Tamanho.toListDTO(tamanhos));
+	public ResponseEntity<List<TamanhoDTO>> listTamanhos() throws NotFoundException {
+
+        return ResponseEntity.ok(tService.listTamanhos());
     }
 
 
@@ -72,16 +65,7 @@ public class TamanhoRest {
 	public ResponseEntity<TamanhoDTO> newTamanho(@RequestBody @Valid TamanhoForm tForm,
     UriComponentsBuilder builder) throws NotFoundException {
 
-		Tamanho tamanho = Tamanho.toTamanho(tForm);
-        tamanhoR.save(tamanho);
-        /** 
-         * {id} caminho variável, irá receber o id do tamanho criado
-         * buildAndExpand irá construir a url e colocar a id do tamanho criado na variável
-         */
-		URI uri = builder.path("/{id}").buildAndExpand(tamanho.getId()).toUri();
-
-        //irá retornar o código HTTP 201(created), a localização do item criado e o corpo do item criado
-		return ResponseEntity.created(uri).body(new TamanhoDTO(tamanho));
+		return tService.newTamanho(tForm, builder);
 	}
 
     /**
@@ -89,38 +73,22 @@ public class TamanhoRest {
      * @Transactional permite que a JPA mantenha o model tamanho no estado Managed
      * e assim permitindo a atualização automática dos dados.
      */
-	@PutMapping("/{id}")
+	@PutMapping("alterarTamanho/{id}")
 	@Transactional
     @CacheEvict(value = "listaChinelos", allEntries = true)
 	public ResponseEntity<TamanhoDTO> updateTamanho(@PathVariable(value = "id") Long id,
 			@Valid @RequestBody TamanhoForm tForm) throws NotFoundException {
-
-		// Buscando o tamanho por id no banco de dados. Caso não encontre irá jogar uma NotFoundException
-		Tamanho tamanho = tamanhoR.findById(id).orElseThrow(()
-        -> new NotFoundException("Tamanho não encontrado!"));
-
-        /**
-         * Convertendo e atualizando o model com os dados inseridos no form.
-         * Como o model tamanho está no estado Managed, ao atualizar
-         * seus dados, o JPA detecta e também atualiza no banco.
-         */
-        Tamanho.toTamanho(tForm);
-		// Convertendo o model atualizado do tamanho para um dto e retornando com o código HTTP 200(ok)
-		 return ResponseEntity.ok(new TamanhoDTO(tamanho));
+		return ResponseEntity.ok(tService.updateTamanho(id, tForm));
 	}
 
      /**
      * @DeleteMapping mapear a requisição delete para deletar um tamanho
      */
-	@DeleteMapping("/{id}")
+	@DeleteMapping("deletarTamanho/{id}")
 	@Transactional
     @CacheEvict(value = "listaChinelo", allEntries = true)
 	public ResponseEntity<?> deleteTamanho(@PathVariable(value = "id") Long id) throws NotFoundException {
-
-        Tamanho tamanho = tamanhoR.findById(id).orElseThrow(()
-        -> new NotFoundException("Tamanho não encontrado!"));
-
-        tamanhoR.delete(tamanho);
+        tService.deleteTamanho(id);
         return ResponseEntity.noContent().build();
 	}
 }

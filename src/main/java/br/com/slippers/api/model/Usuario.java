@@ -17,6 +17,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -62,7 +63,7 @@ public class Usuario implements UserDetails {
 	@ManyToMany(cascade = CascadeType.REMOVE)
 	@JoinTable(
 		name = "usuario_has_endereco",
-		joinColumns = @JoinColumn(name = "cliente_id"),
+		joinColumns = @JoinColumn(name = "usuario_id"),
 		inverseJoinColumns = @JoinColumn(name = "endereco_id")
 	)
 	private List<Endereco> enderecos = new ArrayList<Endereco>();
@@ -222,6 +223,10 @@ public class Usuario implements UserDetails {
 
     public static List<UsuarioDTO> toListDTO(List<Usuario> usuarios) {
 		return usuarios.stream().map(Usuario::toDTO).toList();
+    }
+
+	public static Page<UsuarioDTO> toPageDTO(Page<Usuario> usuarios) {
+		return usuarios.map(Usuario::toDTO);
     }
 
 

@@ -77,7 +77,6 @@ public class CarrinhoHasChinelo {
         List<CarrinhoHasChineloDTO> cHasChineloDTOs = new ArrayList<CarrinhoHasChineloDTO>();
         for (CarrinhoHasChinelo carrinhoHasChinelo : cHasChinelos) {
             CarrinhoHasChineloDTO cHasChineloDTO = new CarrinhoHasChineloDTO();
-            cHasChineloDTO.setCarrinho(carrinhoDTO);
             cHasChineloDTO.setChinelo(carrinhoHasChinelo.getChinelo().toDTO());
             cHasChineloDTO.setQuantidade(carrinhoHasChinelo.getQuantidade());
             cHasChineloDTO.setValor(carrinhoHasChinelo.getValor());

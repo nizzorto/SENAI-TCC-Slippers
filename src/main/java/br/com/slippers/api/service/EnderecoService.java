@@ -2,6 +2,7 @@ package br.com.slippers.api.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
@@ -15,6 +16,8 @@ import br.com.slippers.api.form.EnderecoForm;
 import br.com.slippers.api.model.Endereco;
 import br.com.slippers.api.model.Usuario;
 import br.com.slippers.api.repository.EnderecoRepository;
+import br.com.slippers.api.repository.UsuarioRepository;
+import javassist.NotFoundException;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -26,6 +29,9 @@ public class EnderecoService {
     @Autowired
     EnderecoRepository enderecoR;
 
+    @Autowired
+    UsuarioRepository usuarioR;
+
     public EnderecoDTO obterEnderecoCep(CepForm cepForm) {
 
       Mono<EnderecoForm> monoEndereco = this.webClientCep
@@ -35,9 +41,10 @@ public class EnderecoService {
 			.bodyToMono(EnderecoForm.class);
 	
 		EnderecoForm eForm = monoEndereco.block();
-         List<Usuario> usuarios = new ArrayList<Usuario>();
-         Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-         usuarios.add(usuario);
+    
+        List<Usuario> usuarios = new ArrayList<Usuario>();
+        Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        usuarios.add(usuario);
         Endereco endereco = eForm.toEndereco();
         endereco.setNumero(cepForm.getNumero());
         endereco.setComplemento(cepForm.getComplemento());
@@ -46,4 +53,13 @@ public class EnderecoService {
         enderecoR.save(endereco);
         return endereco.toDTO();
 	}
+
+    public List<EnderecoDTO> buscarEnderecosUsuario() throws NotFoundException{
+      Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+       Optional<List<Endereco>> endereco = enderecoR.findByUsuariosId(usuario.getId());
+       if(endereco.isEmpty()) {
+         throw new NotFoundException("Você não cadastrou nenhum endereço!");
+       }
+       return Endereco.ToListDTO(endereco.get());
+    }
 }

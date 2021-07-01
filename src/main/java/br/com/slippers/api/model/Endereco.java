@@ -115,4 +115,8 @@ public class Endereco {
     public EnderecoDTO toDTO() {
         return new EnderecoDTO(this);
     }
+
+    public static List<EnderecoDTO> ToListDTO(List<Endereco> list) {
+		return list.stream().map(EnderecoDTO::new).toList();
+    }
 }

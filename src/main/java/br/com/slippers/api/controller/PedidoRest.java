@@ -22,17 +22,6 @@ public class PedidoRest {
     
     @Autowired
     PedidoService pedidoService;
-
-    //  @GetMapping
-    //  public ResponseEntity<List<TamanhoDTO>> listTamanhos(@RequestParam(required = false)
-    //  String descricao) throws NotFoundException {
-         
-    //      List<Tamanho> tamanhos = tamanhoR.findAll();
-    //      if(tamanhos.isEmpty()) {
-    //          throw new NotFoundException("Não há tamanhos cadastrados no BD");
-    //      }
-    //      return ResponseEntity.ok(Tamanho.toListDTO(tamanhos));
-    //  }
  
      @PostMapping("/realizarPedido")
      @Transactional

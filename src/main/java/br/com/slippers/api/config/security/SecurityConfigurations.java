@@ -7,6 +7,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -76,17 +77,19 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 		 * .and(): define mais outras configurações
 		 */
 		http.authorizeRequests()
-		.antMatchers("/", "/css/**", "/images/**", "/img/**", "/js/**", "/h2-console/**").permitAll()
-		.antMatchers(HttpMethod.GET, "/api/chinelo").permitAll()
-		.antMatchers(HttpMethod.POST, "/api/chinelo/*", "/api/tamanho/*").hasAuthority("ADMIN")
-		.antMatchers(HttpMethod.PUT, "/api/chinelo/*", "/api/tamanho/*").hasAuthority("ADMIN")
-		.antMatchers(HttpMethod.DELETE, "/api/chinelo/*, /api/tamanho/*").hasAuthority("ADMIN")
-        .antMatchers("/api/auth").permitAll()
-		.antMatchers("/swagger-ui.html/**").hasAuthority("ADMIN")
-		.anyRequest().authenticated()
+		.antMatchers("/").permitAll()
+		.antMatchers(HttpMethod.POST, "/api/auth", "/api/usuario/inserirUsuario").permitAll()
+		.antMatchers("/api/endereco/**", "/api/carrinho/**", "/api/pedido/**").authenticated()
+		.antMatchers(HttpMethod.GET, "/api/chinelo/listaChinelos", "/api/tamanho/listaTamanhos").permitAll()
+		.anyRequest().hasAnyAuthority("ADM")
         .and().csrf().disable()
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 		.and().addFilterBefore(new AutenticacaoViaTokenFilter(tokenService, usuarioRepository), UsernamePasswordAuthenticationFilter.class);
+	}
+
 	
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		web.ignoring().antMatchers("/**.html", "/css/**", "/images/**", "/img/**", "/js/**", "/h2-console/**" ,"/v2/api-docs", "/webjars/**", "/configuration/**", "/swagger-resources/**", "/swagger.json", "/swagger-ui.html");
 	}
 }

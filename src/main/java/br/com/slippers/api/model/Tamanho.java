@@ -2,11 +2,15 @@ package br.com.slippers.api.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+
 import br.com.slippers.api.dto.TamanhoDTO;
 import br.com.slippers.api.form.TamanhoForm;
 
@@ -24,6 +28,9 @@ public class Tamanho
 		this.id = tDTO.getId();
 		this.descricao = tDTO.getDescricao();
 	}
+
+	@ManyToMany(mappedBy = "tamanhos", cascade = CascadeType.MERGE)
+	private List<Chinelo> chinelos;
 
 	public Tamanho() {}
 

@@ -10,9 +10,10 @@ public class CarrinhoDTO {
 
     private Long id;
 	private String emailUsuario;
-	private List<CarrinhoHasChineloDTO> carrinhoHasChinelo;
-	private double totalCarrinho;
-	private int qtdItensCarrinho;
+    private double valorTotalCarrinho;
+	private int quantidadeItensCarrinho;
+	private List<CarrinhoHasChineloDTO> chinelosCarrinho;
+
 
     public CarrinhoDTO(
         Long id,
@@ -23,9 +24,9 @@ public class CarrinhoDTO {
         ) {
         this.id = id;
         this.emailUsuario = emailUsuario;
-        this.carrinhoHasChinelo = carrinhoHasChinelo;
-        this.totalCarrinho = totalCarrinho;
-        this.qtdItensCarrinho = qtdItensCarrinho;
+        this.chinelosCarrinho = carrinhoHasChinelo;
+        this.valorTotalCarrinho = totalCarrinho;
+        this.quantidadeItensCarrinho = qtdItensCarrinho;
     }
 
     public CarrinhoDTO(){}
@@ -33,9 +34,9 @@ public class CarrinhoDTO {
     public CarrinhoDTO(Carrinho carrinho) {
         this.id = carrinho.getId();
         this.emailUsuario = carrinho.getUsuario().getEmail();
-        this.totalCarrinho = carrinho.getTotalCarrinho();
-        this.qtdItensCarrinho = carrinho.getQtdItensCarrinho();
-        this.carrinhoHasChinelo = CarrinhoHasChinelo.toListDTO(carrinho.getChinelosCarrinho(), this);
+        this.valorTotalCarrinho = carrinho.getTotalCarrinho();
+        this.quantidadeItensCarrinho = carrinho.getQtdItensCarrinho();
+        this.chinelosCarrinho = CarrinhoHasChinelo.toListDTO(carrinho.getChinelosCarrinho(), this);
     }
 
     public Long getId() {
@@ -54,28 +55,28 @@ public class CarrinhoDTO {
         this.emailUsuario = emailUsuario;
     }
 
-    public List<CarrinhoHasChineloDTO> getChinelosCarrinhoDTO() {
-        return this.carrinhoHasChinelo;
+    public double getValorTotalCarrinho() {
+        return this.valorTotalCarrinho;
     }
 
-    public void setChinelosCarrinhoDTO(List<CarrinhoHasChineloDTO> carrinhoHasChinelo) {
-        this.carrinhoHasChinelo = carrinhoHasChinelo;
-    }   
-
-    public double getTotalCarrinho() {
-        return this.totalCarrinho;
+    public void setValorTotalCarrinho(double valorTotalCarrinho) {
+        this.valorTotalCarrinho = valorTotalCarrinho;
     }
 
-    public void setTotalCarrinho(double totalCarrinho) {
-        this.totalCarrinho = totalCarrinho;
+    public int getQuantidadeItensCarrinho() {
+        return this.quantidadeItensCarrinho;
     }
 
-    public int getQtdItensCarrinho() {
-        return this.qtdItensCarrinho;
+    public void setQuantidadeItensCarrinho(int quantidadeItensCarrinho) {
+        this.quantidadeItensCarrinho = quantidadeItensCarrinho;
     }
 
-    public void setQtdItensCarrinho(int qtdItensCarrinho) {
-        this.qtdItensCarrinho = qtdItensCarrinho;
+    public List<CarrinhoHasChineloDTO> getChinelosCarrinho() {
+        return this.chinelosCarrinho;
     }
 
+    public void setChinelosCarrinho(List<CarrinhoHasChineloDTO> carrinhoHasChinelo) {
+        this.chinelosCarrinho = carrinhoHasChinelo;
+    }
+   
 }

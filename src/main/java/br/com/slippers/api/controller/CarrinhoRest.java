@@ -39,7 +39,7 @@ public class CarrinhoRest {
 	public ResponseEntity<?> listCarrinho(@PageableDefault(sort = "nome", direction = Direction.ASC, page = 0,
     size = 15) Pageable paginarChinelos) throws NotFoundException {
 
-        return carrinhoService.listCarrinho(paginarChinelos);
+        return ResponseEntity.ok(carrinhoService.listCarrinho(paginarChinelos));
     }
     
 	@PostMapping("/inserirChinelo")
@@ -48,7 +48,7 @@ public class CarrinhoRest {
 	public ResponseEntity<?> insertChinelo(@Valid @RequestBody CarrinhoForm cForm) 
     throws NotFoundException, AlreadyBoundException {
 
-        return carrinhoService.insertChinelo(cForm);
+        return ResponseEntity.ok(carrinhoService.insertChinelo(cForm));
 	}
 
     @PutMapping("/alterarQtdChineloCarrinho")
@@ -56,14 +56,15 @@ public class CarrinhoRest {
     @CacheEvict(value = "listaCarrinho", allEntries = true)
 	public ResponseEntity<CarrinhoDTO> updateQtdChineloCarrinho(@RequestBody @Valid CarrinhoForm cForm) 
     throws NotFoundException {
+        
         return carrinhoService.updateChineloCarrinho(cForm);
 	}
  
-	@DeleteMapping("/apagarChinelo/{id}")
+	@DeleteMapping("/deletarChinelo/{id}")
 	@Transactional
     @CacheEvict(value = "listaCarrinho", allEntries = true)
-	public ResponseEntity<?> deleteChinelo(@PathVariable(value = "id", required = true) String idChinelo) throws NotFoundException {
+	public ResponseEntity<CarrinhoDTO> deleteChinelo(@PathVariable(value = "id", required = true) String idChinelo) throws NotFoundException {
         
-        return carrinhoService.deleteChinelo(idChinelo);
+        return ResponseEntity.ok(carrinhoService.deleteChinelo(idChinelo));
 	}
 }

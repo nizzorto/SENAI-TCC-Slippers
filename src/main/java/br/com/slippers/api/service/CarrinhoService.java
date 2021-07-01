@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -31,48 +32,50 @@ public class CarrinhoService {
      @Autowired
      ChineloRepository chineloR;
 
-     public ResponseEntity<?> listCarrinho(Pageable paginarChinelos) throws NotFoundException {
+     public CarrinhoDTO listCarrinho(Pageable paginarChinelos) throws NotFoundException {
 
         Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-         Optional<Carrinho> carrinho = carrinhoR.findByUsuario(usuario);
-         if(carrinho.isEmpty()) {
-             throw new NotFoundException("Carrinho não encontrado!");
-         }
-         return ResponseEntity.ok(carrinho.get().toDTO());
+        Optional<Carrinho> carrinho = carrinhoR.findByUsuarioEmail(usuario.getEmail());
+        if(carrinho.isEmpty()) {
+            throw new NotFoundException("Carrinho não encontrado!");
+        }
+        return carrinho.get().toDTO();
      }
     
 
-     public ResponseEntity<?> insertChinelo(CarrinhoForm cForm) 
+     public CarrinhoDTO insertChinelo(CarrinhoForm cForm) 
      throws NotFoundException, AlreadyBoundException {
 
-        Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-         Carrinho carrinho = carrinhoR.findByUsuario(usuario).orElseThrow(()
-         -> new NotFoundException("Usuário não encontrado!"));
- 
-         Optional<Chinelo> chinelo = chineloR.findById(cForm.getIdChinelo());
- 
-         carrinho.addChinelo(chinelo.get(), cForm.getQuantidade());
-         
-         return ResponseEntity.ok(carrinho.toDTO());
+        Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+        String usuario = loggedInUser.getName();
+        Carrinho carrinho = carrinhoR.findByUsuarioEmail(usuario).orElseThrow(()
+        -> new NotFoundException("Usuário não encontrado!"));
+
+        Chinelo chinelo = chineloR.findById(cForm.getIdChinelo()).orElseThrow(()
+        -> new NotFoundException("Chinelo não encontrado!"));
+
+        carrinho.addChinelo(chinelo, cForm.getQuantidade());
+        
+        return carrinho.toDTO();
      }
  
 
-     public ResponseEntity<?> deleteChinelo(String idChinelo) throws NotFoundException {
-         Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-         Carrinho carrinho = carrinhoR.findByUsuario(usuario).orElseThrow(()
-         -> new NotFoundException("Usuário não encontrado!"));
-         
-         carrinho.deleteChinelo(idChinelo);
-         cHasChineloRepository.deleteByChineloId(Long.parseLong(idChinelo));
-         
-         return ResponseEntity.ok(carrinho.toDTO());
+     public CarrinhoDTO deleteChinelo(String idChinelo) throws NotFoundException {
+        Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Carrinho carrinho = carrinhoR.findByUsuarioEmail(usuario.getEmail()).orElseThrow(()
+        -> new NotFoundException("Usuário não encontrado!"));
+        
+        carrinho.deleteChinelo(idChinelo);
+        cHasChineloRepository.deleteByChineloId(Long.parseLong(idChinelo));
+        
+        return carrinho.toDTO();
      }
 
 
      public ResponseEntity<CarrinhoDTO> updateChineloCarrinho(CarrinhoForm cForm) throws NotFoundException {
         Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Carrinho carrinho = carrinhoR.findByUsuario(usuario).orElseThrow(()
+        Carrinho carrinho = carrinhoR.findByUsuarioEmail(usuario.getEmail()).orElseThrow(()
         -> new NotFoundException("Usuário não encontrado!"));
         
         carrinho.alterarQtdChineloCarrinho(cForm.getIdChinelo(), cForm.getQuantidade());
